@@ -1,0 +1,43 @@
+.group_notice_area {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  .notice_list {
+    padding: 10px;
+    margin: 0 15px 0 15px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+    img {
+      width: 230px;
+    }
+
+    .notice_info {
+      width: 230px;
+      height: 80px;
+      border: 1px solid #d8d8d8;
+      border-top: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      .notice_title {
+        margin: 0;
+        font-size: 13px;
+        word-break: normal;
+      }
+
+      .notice_price,
+      .notice_date {
+        border: 1px solid #a1a1a1;
+        border-radius: 5px;
+        font-size: small;
+        float: right;
+        padding: 3px;
+        margin: 10px;
+      }
+    }
+  }
+}

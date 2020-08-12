@@ -3,38 +3,9 @@ import Iframe from "react-iframe";
 
 import "./TodayContainer.css";
 
-function Calender() {
-  return (
-    <div className="calender_area">
-      {/* <h3 class="calender_header"></h3> */}
-      <table className="calender">
-        <colgroup>
-          <col className="sun" />
-          <col />
-          <col />
-          <col />
-          <col />
-          <col />
-          <col className="sat" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col" className="col">
-              일
-            </th>
-            <th>월</th>
-            <th>화</th>
-            <th>수</th>
-            <th>목</th>
-            <th>금</th>
-            <th scope="col">토</th>
-          </tr>
-        </thead>
-        <tbody className="calender_tbody"></tbody>
-      </table>
-    </div>
-  );
-}
+function CalenderForm() {}
+
+function Calender() {}
 
 function FacebookPage() {
   return (
