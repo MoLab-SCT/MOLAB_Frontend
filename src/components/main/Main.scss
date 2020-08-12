@@ -1,3 +1,30 @@
+.group {
+  position: relative;
+  border-top: 1px solid #d8d8d8;
+  margin-top: 50px;
+  padding: 20px;
+  box-sizing: border-box;
+  clear: both;
+}
+
+.group > .group_header_area {
+  top: -40px;
+}
+
+.group_header_area {
+  position: relative;
+  text-align: center;
+  overflow: auto;
+}
+
+.group_header {
+  display: inline-block;
+  font-size: 34px;
+  font-weight: bold;
+  background-color: white;
+  padding: 0 20px;
+}
+
 .background_image {
   background-image: url("../../image/main-slider-img1.png");
   background-repeat: no-repeat;
