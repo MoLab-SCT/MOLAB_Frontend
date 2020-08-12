@@ -1,0 +1,62 @@
+body {
+  background: whitesmoke;
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  position: relative;
+
+  .login_wrapper {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+
+    .molab_logo {
+      margin: 30px;
+    }
+
+    .form {
+      margin: 0 auto;
+      background: #ffffff;
+      max-width: 360px;
+      padding: 45px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+      .login_form input {
+        font-family: sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+
+      .common_button {
+        font-family: sans-serif;
+        outline: 0;
+        background: #84cde5;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #ffffff;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 5px;
+
+        &.kakao,
+        &.naver,
+        &.google {
+          background: white;
+          color: black;
+          border: 1px solid #d8d8d8;
+        }
+      }
+      span {
+        font-size: 13px;
+        padding: 3px;
+      }
+    }
+  }
+}

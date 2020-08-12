@@ -4,6 +4,8 @@ import NoticeContainer from "./notice/NoticeContainer";
 import ReviewContainer from "./review/ReviewContainer";
 import MainMenuContainer from "./menu/MainMenu";
 import SliderSection from "./slider/SliderSection";
+import Footer from "../footer/Footer";
+
 import "./Main.scss";
 
 function Main() {
@@ -17,6 +19,7 @@ function Main() {
       <TodayContainer />
       <NoticeContainer />
       <ReviewContainer />
+      <Footer />
     </div>
   );
 }

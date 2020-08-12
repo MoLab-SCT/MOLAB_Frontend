@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainContainer from "../components/main/Main";
 import IntroduceContainer from "../components/introduce/Introduce";
-import Footer from "../components/footer/Footer";
+import LoginContainer from "../components/login/LoginContainer";
 
 function Router() {
   return (
@@ -11,8 +11,8 @@ function Router() {
         <Switch>
           <Route exact path="/" component={MainContainer} />
           <Route path="/introduce" component={IntroduceContainer} />
+          <Route path="/login" component={LoginContainer} />
         </Switch>
-        <Footer />
       </>
     </BrowserRouter>
   );
