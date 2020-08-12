@@ -1,4 +1,6 @@
 import React from "react";
+import Iframe from "react-iframe";
+
 import "./TodayContainer.css";
 
 function Calender() {
@@ -34,44 +36,18 @@ function Calender() {
   );
 }
 
-function Plan() {
+function FacebookPage() {
   return (
-    <div className="plan">
-      <nav>
-        <div className="nav_tabs">
-          <div className="nav_tab active" id="todayTab">
-            오늘의 event
-          </div>
-          <div className="nav_tab" id="tomorTab">
-            내일의 event
-          </div>
-        </div>
-      </nav>
-      <div className="tab_contents">
-        <div className="tab_event active" id="todayEvent">
-          <h4>(Today) 스마트시티 시흥 리빙랩 그룹 모집</h4>
-          <img src="resources/img/event.PNG" alt="event" />
-          <p>시흥시 리빙랩에서 함께 할 그룹을 모집합니다!</p>
-          <div className="tab_tags">
-            <span>#시흥시</span>
-            <span>#스마트시티</span>
-            <span>#그룹모집</span>
-            <span>#시흥리빙랩</span>
-          </div>
-        </div>
-        <div className="tab_event" id="tomorEvent">
-          <h4>(Tomorrow) 스마트시티 시흥 리빙랩 그룹 모집</h4>
-          <img src="resources/img/event.PNG" alt="event" />
-          <p>시흥시 리빙랩에서 함께 할 그룹을 모집합니다!</p>
-          <div className="tab_tags">
-            <span>#시흥시</span>
-            <span>#스마트시티</span>
-            <span>#그룹모집</span>
-            <span>#시흥리빙랩</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Iframe
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Flivinglab.siheung&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+      width="340px"
+      height="430px"
+      style={{ border: "none", overflow: "hidden" }}
+      scrolling="no"
+      frameborder="0"
+      allowTransparency="true"
+      allow="encrypted-media"
+    />
   );
 }
 
@@ -82,7 +58,7 @@ function TodayContainer() {
         <span className="group_header">Today's</span>
       </div>
       <div className="group_today_area">
-        <Plan />
+        <FacebookPage />
       </div>
     </div>
   );

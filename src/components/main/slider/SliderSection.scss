@@ -1,28 +1,68 @@
+slick-list:focus {
+  outline: none;
+}
 .img_slider {
   position: relative;
   width: 100%;
-  overflow: auto;
+  height: 450px;
   text-align: center;
+  padding-bottom: 3px;
+  letter-spacing: -0.95px;
 
   .livinglab_slide,
   .sct_slide {
+    position: relative;
     height: 450px;
+
+    .content_center {
+      width: 380px;
+      position: absolute;
+      left: 29%;
+      top: 22%;
+      margin: 0;
+      padding: 20px;
+    }
+  }
+
+  .livinglab_slide {
+    em {
+      font-size: 40px;
+      display: block;
+      font-style: normal;
+      color: white;
+    }
+    strong {
+      font-size: 55px;
+      color: #84cde5;
+    }
+  }
+
+  .sct_slide {
+    strong {
+      font-size: 51px;
+      color: #84cde5;
+    }
   }
 
   .slide-arrow {
     width: 60px;
     height: 450px;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .slide-prev {
+    &.slide-prev {
       float: left;
-      padding: 10% 0 0 10%;
+      margin-left: 20px;
     }
 
-    .slide-next {
+    &.slide-next {
       float: right;
-      padding-top: 10%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-right: 20px;
     }
 
     .ico_next_arrow {
@@ -33,6 +73,7 @@
       background-position: center;
       display: inline-block;
       font-size: 0;
+      padding: 20px;
 
       &:hover {
         background-color: hsla(0, 0%, 0%, 0.5);
@@ -47,6 +88,7 @@
       background-position: center;
       display: inline-block;
       font-size: 0;
+      padding: 20px;
 
       &:hover {
         background-color: hsla(0, 0%, 0%, 0.5);

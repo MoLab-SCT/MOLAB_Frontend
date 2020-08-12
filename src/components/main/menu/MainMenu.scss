@@ -1,5 +1,5 @@
+// #84cde5 변수 지정
 header {
-  border-bottom: 1px solid #d8d8d8;
   z-index: 0;
   width: 100%;
   min-width: 1200px;
@@ -28,17 +28,25 @@ header {
     ul {
       list-style: none;
       display: inline-block;
+      margin: 0;
       li {
         display: inline-flex;
         .menu_item {
           color: white;
           font-weight: bold;
-          padding: 5px;
-          margin-left: 10px;
+          padding: 13px;
           &.login {
             color: black;
             background-color: white;
+            padding: 10px;
+            margin: 3px;
           }
+          &:hover {
+            color: #84cde5;
+          }
+        }
+        .active {
+          color: #84cde5;
         }
       }
     }

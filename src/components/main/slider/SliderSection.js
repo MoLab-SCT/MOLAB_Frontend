@@ -31,7 +31,6 @@ function SliderSection() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    adaptiveHeight: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
@@ -40,11 +39,16 @@ function SliderSection() {
     <div className="img_slider">
       <Slider {...settings}>
         <div className="livinglab_slide">
-          <h3>What’s Living Lab?</h3>
-          <strong>리빙랩이란?</strong>
+          <div className="content_center">
+            <em>What’s Living Lab?</em>
+            <strong>리빙랩이란?</strong>
+          </div>
         </div>
         <div className="sct_slide">
-          <strong>TEAM S.C.T를 소개합니다.</strong>
+          {" "}
+          <div className="content_center">
+            <strong>TEAM S.C.T를 소개합니다.</strong>
+          </div>
         </div>
       </Slider>
     </div>
