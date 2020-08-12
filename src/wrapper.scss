@@ -1,0 +1,18 @@
+html {
+  height: 100%;
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-x: hidden;
+
+    .molab_wrapper {
+      min-width: 1200px;
+      width: 100%;
+      height: 100%;
+      line-height: 1.5;
+    }
+  }
+}

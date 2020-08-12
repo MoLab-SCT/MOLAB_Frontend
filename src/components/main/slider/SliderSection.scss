@@ -1,0 +1,56 @@
+.img_slider {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+
+  .livinglab_slide,
+  .sct_slide {
+    height: 450px;
+  }
+
+  .slide-arrow {
+    width: 60px;
+    height: 450px;
+    cursor: pointer;
+    display: inline-block;
+
+    .slide-prev {
+      float: left;
+      padding: 10% 5% 5% 10%;
+    }
+
+    .slide-next {
+      float: right;
+      padding-top: 10%;
+    }
+
+    .ico_next_arrow {
+      width: 60px;
+      height: 80px;
+      background: url("../../../image/next-arrow.png") no-repeat;
+      background-size: 30px;
+      background-position: center;
+      display: inline-block;
+      font-size: 0;
+
+      &:hover {
+        background-color: hsla(0, 0%, 0%, 0.5);
+      }
+    }
+
+    .ico_prev_arrow {
+      width: 60px;
+      height: 80px;
+      background: url("../../../image/prev-arrow.png") no-repeat 0 0;
+      background-size: 30px;
+      background-position: center;
+      display: inline-block;
+      font-size: 0;
+
+      &:hover {
+        background-color: hsla(0, 0%, 0%, 0.5);
+      }
+    }
+  }
+}

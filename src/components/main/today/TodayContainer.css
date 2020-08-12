@@ -1,0 +1,136 @@
+/*today*/
+.group_today_area {
+  position: relative;
+}
+
+.calender_area {
+  margin: 4px;
+  overflow: auto;
+}
+
+.calender_area {
+  width: 49%;
+}
+
+.calender {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.calender_header {
+  border-top: 1px solid #686869;
+}
+
+.calender th,
+.calender td {
+  padding: 15px 34px !important;
+}
+
+.sun,
+.sat {
+  background-color: #f3f3f3;
+}
+.calender thead {
+  border-bottom: 0.2px solid #535453;
+  background-color: white;
+}
+
+/* .calender tbody td {
+    border-bottom: 0.1px solid #858484 !important;
+    border-right: 0.1px solid #858484 !important;
+  } */
+
+.plan {
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+
+.plan nav {
+  position: relative;
+}
+
+.nav_tabs {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: -47px;
+  display: inline-flex;
+}
+.nav_tab {
+  display: inline-block;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #a1a1a1;
+  border-bottom: none;
+  padding: 13px;
+  background-color: #a1a1a1;
+  color: white;
+  margin: 0;
+}
+
+.nav_tab.active {
+  background-color: white;
+  color: black;
+}
+
+.nav_tab:hover {
+  cursor: pointer;
+}
+
+.tab_contents {
+  border: 1px solid #a1a1a1;
+  height: 299px;
+  position: relative;
+}
+
+.tab_event {
+  display: none;
+  overflow: auto;
+}
+
+.tab_event.active {
+  display: block;
+}
+
+.tab_event h4 {
+  margin: 0;
+  font-size: 25px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid #a1a1a1;
+}
+
+.tab_event p {
+  font-size: 23px;
+  padding: 12px;
+  word-break: normal;
+  width: 240px;
+  display: inline-block;
+  margin: 0;
+}
+
+.tab_tags {
+  width: 243px;
+  height: auto;
+  position: absolute;
+  right: 3%;
+  bottom: 12%;
+  display: inline-block;
+}
+
+.tab_tags span {
+  font-size: 12px;
+  border-radius: 20px;
+  background-color: #ebecec;
+  padding: 10px;
+  margin-top: 2px;
+  float: left;
+}
+
+.tab_event img {
+  width: 250px;
+  height: 200px;
+  margin: 15px;
+  box-shadow: -2px 2px 5px 2px #a1a1a1;
+  float: left;
+}

@@ -1,0 +1,15 @@
+.group_notice_images {
+  text-align: center;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#group_notice_area img {
+  width: auto;
+  height: auto;
+  max-width: 18%;
+  max-height: 340px;
+  margin: 10px 50px;
+}

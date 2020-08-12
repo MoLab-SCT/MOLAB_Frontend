@@ -1,0 +1,74 @@
+header {
+  border-bottom: 1px solid #d8d8d8;
+  z-index: 0;
+  width: 100%;
+  min-width: 1200px;
+
+  .header_top {
+    padding: 60px 0 30px;
+    position: relative;
+    height: 140px;
+
+    .logo_area {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 5px;
+    }
+  }
+
+  .wide_max_width_area {
+    box-sizing: border-box;
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header_menu {
+    float: right;
+    ul {
+      list-style: none;
+      display: inline-block;
+      li {
+        display: inline-flex;
+        .menu_item {
+          color: white;
+          font-weight: bold;
+          padding: 5px;
+          margin-left: 10px;
+          &.login {
+            color: black;
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .search_area {
+    position: absolute;
+    top: 65px;
+    left: 300px;
+
+    .search_text {
+      width: 350px;
+      height: 35px;
+      border: 2px solid #84cde5;
+      border-radius: 24px;
+      padding: 0 8px 0 22px;
+      background-color: transparent;
+    }
+
+    .search_btn {
+      background: url("../../../image/Search.png") no-repeat;
+      width: 38px;
+      height: 38px;
+      border: none;
+      background-size: 25px;
+      position: absolute;
+      top: 6px;
+      right: 3px;
+      box-sizing: border-box;
+      text-indent: -9999em;
+    }
+  }
+}
