@@ -16,9 +16,11 @@ function Main() {
         <Menu fontColor="white" logoColor="white" />
         <SliderSection />
       </div>
-      <TodayContainer />
-      <NoticeContainer />
-      <ReviewContainer />
+      <main>
+        <TodayContainer />
+        <NoticeContainer />
+        <ReviewContainer />
+      </main>
       <Footer />
     </div>
   );
