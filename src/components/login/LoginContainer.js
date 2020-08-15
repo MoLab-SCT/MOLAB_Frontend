@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./LoginContainer.scss";
-import Logo from "../../image/logo.png";
+import Logo from "../../image/molab-logo-black.png";
 
 function LoginContainer() {
   return (

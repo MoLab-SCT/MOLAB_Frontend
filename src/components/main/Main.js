@@ -1,8 +1,8 @@
 import React from "react";
 import TodayContainer from "./today/TodayContainer";
-import NoticeContainer from "./notice/NoticeContainer";
-import ReviewContainer from "./review/ReviewContainer";
-import MainMenuContainer from "./menu/MainMenu";
+import NoticeContainer from "./noticeSection/NoticeContainer";
+import ReviewContainer from "./reviewSection/ReviewContainer";
+import Menu from "../menu/Menu";
 import SliderSection from "./slider/SliderSection";
 import Footer from "../footer/Footer";
 
@@ -13,7 +13,7 @@ function Main() {
     <div className="molab_wrppaer">
       <div className="background_image">
         <div className="background_image_dark"></div>
-        <MainMenuContainer />
+        <Menu fontColor="white" logoColor="white" />
         <SliderSection />
       </div>
       <TodayContainer />
