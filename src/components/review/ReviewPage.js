@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "../menu/Menu";
+import "./ReviewPage.scss";
 
 // 페이지네이션 / 카테고리 버튼 추가 예정
 
@@ -9,14 +10,17 @@ function Review({ review }) {
   return (
     <div className="review">
       <img src={imageSrc} alt={title} />
-      <h3>{title}</h3>
-      <p className="review_paragraph">{contents}</p>
-      <span>{date}</span>
+      <div className="review_paragraph">
+        <h3 className="review_header">"{title}"</h3>
+        <p>{contents}</p>
+        <span>{date}</span>
+      </div>
     </div>
   );
 }
 
 function ReviewPage() {
+  /* 데이터 가져오기 */
   const reviews = [
     {
       key: 1,
