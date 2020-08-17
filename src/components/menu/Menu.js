@@ -16,7 +16,7 @@ function MainMenu({ fontColor, logoColor }) {
     {
       key: 2,
       title: "열린 참여",
-      link: "/openParticipate",
+      link: "/announce",
       className: "menu_item",
     },
     {
