@@ -1,0 +1,23 @@
+.announce_wrapper_header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  height: 230px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  h1 {
+    margin: 5px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  input {
+    width: 300px;
+    margin: 25px auto;
+  }
+}
