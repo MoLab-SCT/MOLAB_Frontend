@@ -3,6 +3,23 @@ import axios from "axios";
 import Menu from "../menu/Menu";
 import "./AnnouncePage.scss";
 
+function AnnounceList({ list }) {
+  const { an_title, an_startdate, an_enddate, an_img } = list;
+
+  const link = "./img" + an_img;
+  console.log(link);
+
+  return (
+    <div className="announce_list">
+      <img src={require("" + link)} alt={an_title} />
+      <p>{an_title}</p>
+      <span className="date">
+        {an_startdate} ~ {an_enddate}{" "}
+      </span>
+      <span className="more_btn">더보기 {"\u003E"}</span>
+    </div>
+  );
+}
 function AnnouncePage() {
   const [lists, setList] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -38,9 +55,9 @@ function AnnouncePage() {
             <p>다양한 활동을 찾아보고 참여해보세요!</p>
             <input></input>
           </div>
-          <div className="review_list">
+          <div className="announce_lists">
             {lists.map((list) => (
-              <p>{list.username}</p>
+              <AnnounceList list={list} key={list.an_no} />
             ))}
           </div>
         </div>

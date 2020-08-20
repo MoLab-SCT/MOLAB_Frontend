@@ -3,7 +3,7 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  height: 230px;
+  height: 340px;
   padding: 20px;
   box-sizing: border-box;
 
@@ -19,5 +19,49 @@
   input {
     width: 300px;
     margin: 25px auto;
+  }
+}
+
+.announce_lists {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+
+  .announce_list {
+    width: 270px;
+    border: 1px solid #b6b6b6;
+    padding: 10px;
+    margin: 8px;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #84cde5;
+
+      p {
+        text-decoration: underline;
+      }
+    }
+
+    img {
+      display: block;
+      height: 338px;
+      width: 265px;
+      margin: auto;
+    }
+
+    p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 13px;
+
+      &.more_btn {
+        float: right;
+      }
+    }
   }
 }
