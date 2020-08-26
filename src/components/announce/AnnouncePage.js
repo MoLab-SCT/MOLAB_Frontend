@@ -20,6 +20,7 @@ function AnnounceList({ list }) {
     </div>
   );
 }
+
 function AnnouncePage() {
   const [lists, setList] = useState(null);
   const [loading, setLoading] = useState(null);

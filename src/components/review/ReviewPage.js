@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../menu/Menu";
+import axios from "axios";
 import "./ReviewPage.scss";
 
 // 페이지네이션 / 카테고리 버튼 추가 예정
 
 function Review({ review }) {
-  const { title, imageSrc, contents, date } = review;
+  const { review_title, review_date, review_content, review_img } = review;
+  const link = "./img" + review_img;
 
   return (
     <div className="review">
-      <img src={imageSrc} alt={title} />
+      <img src={require("" + link)} alt={review_title} />
       <div className="review_paragraph">
-        <h3 className="review_header">"{title}"</h3>
-        <p>{contents}</p>
-        <span>{date}</span>
+        <h3 className="review_header">"{review_title}"</h3>
+        <p>{review_content}</p>
+        <span>{review_date}</span>
       </div>
     </div>
   );
@@ -21,24 +23,30 @@ function Review({ review }) {
 
 function ReviewPage() {
   /* 데이터 가져오기 */
-  const reviews = [
-    {
-      key: 1,
-      imageSrc: require("../../image/review1.png"),
-      title: "시민 연구의 힘을 발견했어요!",
-      contents:
-        "실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을",
-      date: "2020/03/20",
-    },
-    {
-      key: 2,
-      imageSrc: require("../../image/review2.png"),
-      title: "문제해결을 위한 워크숍 교육, 희망드로잉 26+",
-      contents:
-        "실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을",
-      date: "2020/03/20",
-    },
-  ];
+
+  const [reviews, setReviews] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        setReviews(null);
+        setError(null);
+        setLoading(true);
+        const response = await axios.get("/review");
+        setReviews(response.data);
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+    fetchList();
+  }, []);
+
+  if (loading) return <div>로딩 중</div>;
+  if (error) return <div>에러 발생</div>;
+  if (!reviews) return null;
 
   return (
     <div className="molab_wrppaer">
@@ -51,7 +59,7 @@ function ReviewPage() {
           </div>
           <div className="review_list">
             {reviews.map((review) => (
-              <Review key={review.id} review={review} />
+              <Review review={review} />
             ))}
           </div>
         </div>
