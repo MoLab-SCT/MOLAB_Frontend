@@ -1,49 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
+import axios from "axios";
 import logoWhite from "../../image/molab-logo-white.png";
 import logoBlack from "../../image/molab-logo-black.png";
 import classNames from "classnames";
 import "./Menu.scss";
 
 function MainMenu({ fontColor, logoColor }) {
-  const Menuitems = [
-    {
-      key: 1,
-      title: "소개",
-      link: "/introduce",
-      className: "menu_item",
-    },
-    {
-      key: 2,
-      title: "열린 참여",
-      link: "/announce",
-      className: "menu_item",
-    },
-    {
-      key: 3,
-      title: "소통",
-      link: "/communication",
-      className: "menu_item",
-    },
-    {
-      key: 4,
-      title: "후기",
-      link: "/review",
-      className: "menu_item",
-    },
-    {
-      key: 5,
-      title: "네트워크",
-      link: "/network",
-      className: "menu_item",
-    },
-    {
-      key: 6,
-      title: "로그인",
-      link: "/login",
-      className: "menu_item login",
-    },
-  ];
+  let history = useHistory();
+
+  const [loginStatus, setStatus] = useState("");
+
+  useEffect(() => {
+    const isLogin = async () => {
+      const response = await axios({
+        method: "get",
+        withCredentials: true,
+        url: "/auth/islogin",
+      });
+      setStatus(response.data);
+    };
+    isLogin();
+  }, []);
+
+  const logout = async () => {
+    const loginSuccess = await axios({
+      method: "get",
+      withCredentials: true,
+      url: "/auth/logout",
+    });
+    if (loginSuccess.data) {
+      history.push("/");
+    }
+  };
 
   return (
     <header>
@@ -81,17 +71,80 @@ function MainMenu({ fontColor, logoColor }) {
         <nav className="header_menu">
           <ul>
             <li>
-              {Menuitems.map((item) => (
+              <NavLink
+                to="/introduce"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+              >
+                <div className={classNames("menu_item", fontColor)}>소개</div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/announce"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+              >
+                <div className={classNames("menu_item", fontColor)}>
+                  열린 참여
+                </div>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/communication"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+              >
+                <div className={classNames("menu_item", fontColor)}>소통</div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/review"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+              >
+                <div className={classNames("menu_item", fontColor)}>후기</div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/network"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+              >
+                <div className={classNames("menu_item", fontColor)}>
+                  네트워크
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              {loginStatus === false ? (
                 <NavLink
-                  to={item.link}
+                  to="/login"
                   style={{ textDecoration: "none" }}
                   activeClassName="active"
                 >
-                  <div className={classNames(item.className, fontColor)}>
-                    {item.title}
+                  <div className={classNames("menu_item", fontColor)}>
+                    로그인
                   </div>
                 </NavLink>
-              ))}
+              ) : (
+                <NavLink
+                  to="/logout"
+                  style={{ textDecoration: "none" }}
+                  activeClassName="active"
+                >
+                  <div
+                    className={classNames("menu_item", fontColor)}
+                    onClick={logout}
+                  >
+                    로그아웃
+                  </div>
+                </NavLink>
+              )}
             </li>
           </ul>
         </nav>

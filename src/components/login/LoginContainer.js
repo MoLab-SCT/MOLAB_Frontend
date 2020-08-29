@@ -48,26 +48,6 @@ function LoginContainer() {
 
   if (loading) return <div>로딩 중</div>;
 
-  // if(success.Redirect)
-
-  // const loginCheck = () => {
-  //   console.log("click", id, pwd);
-  //   axios({
-  //     method: "post",
-  //     data: {
-  //       id,
-  //       pwd,
-  //     },
-  //     withCredentials: true,
-  //     url: "/login/general_login",
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       return <Redirect to="/" />;
-  //     })
-  //     .catch((error) => console.log("login fail", error));
-  // };
-
   return (
     <div className="login_wrapper">
       <img className="molab_logo" src={Logo} alt="MOLAB_logo" />
