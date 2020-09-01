@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
@@ -8,8 +7,6 @@ import "./LoginContainer.scss";
 import Logo from "../../image/molab-logo-black.png";
 
 function LoginContainer() {
-  let history = useHistory();
-
   const [userInfo, setUserinfo] = useState({
     id: "",
     pwd: "",
@@ -40,9 +37,8 @@ function LoginContainer() {
       url: "/login/general_login",
     });
     setLoading(false);
-    if (response.data.redirectURI === "/") {
-      console.log(response.data.redirectURI);
-      history.push("/");
+    if (response.data) {
+      window.location.replace("/");
     }
   };
 

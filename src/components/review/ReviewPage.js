@@ -21,7 +21,7 @@ function Review({ review }) {
   );
 }
 
-function ReviewPage() {
+function ReviewPage({ loginStatus }) {
   /* 데이터 가져오기 */
 
   const [reviews, setReviews] = useState(null);
@@ -50,7 +50,7 @@ function ReviewPage() {
 
   return (
     <div className="molab_wrppaer">
-      <Menu fontColor="black" logoColor="black" />
+      <Menu fontColor="black" logoColor="black" loginStatus={loginStatus} />
       <main>
         <div className="review_wrapper">
           <div className="review_wrapper_header">

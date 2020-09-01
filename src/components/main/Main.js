@@ -8,12 +8,12 @@ import Footer from "../footer/Footer";
 
 import "./Main.scss";
 
-function Main() {
+function Main({ loginStatus }) {
   return (
     <div className="molab_wrppaer">
       <div className="background_image">
         <div className="background_image_dark"></div>
-        <Menu fontColor="white" logoColor="white" />
+        <Menu fontColor="white" logoColor="white" loginStatus={loginStatus} />
         <SliderSection />
       </div>
       <main>

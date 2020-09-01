@@ -21,7 +21,7 @@ function AnnounceList({ list }) {
   );
 }
 
-function AnnouncePage() {
+function AnnouncePage({ loginStatus }) {
   const [lists, setList] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -48,7 +48,7 @@ function AnnouncePage() {
 
   return (
     <div className="molab_wrppaer">
-      <Menu fontColor="black" logoColor="black" />
+      <Menu fontColor="black" logoColor="black" loginStatus={loginStatus} />
       <main>
         <div className="announce_wrapper">
           <div className="announce_wrapper_header">

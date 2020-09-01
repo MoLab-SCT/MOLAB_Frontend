@@ -1,21 +1,46 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import axios from "axios";
 import MainContainer from "../components/main/Main";
 import IntroduceContainer from "../components/introduce/Introduce";
 import LoginContainer from "../components/login/LoginContainer";
-import ReviewPage from "../components/review/ReviewPage";
-import AnnouncePage from "../components/announce/AnnouncePage";
+import ReviewContainer from "../components/review/ReviewPage";
+import AnnounceContainer from "../components/announce/AnnouncePage";
 
 function Router() {
+  const [loginStatus, setStatus] = useState(false);
+
+  useEffect(() => {
+    const isLogin = async () => {
+      const response = await axios({
+        method: "get",
+        withCredentials: true,
+        url: "/auth/islogin",
+      });
+      setStatus(response.data);
+    };
+
+    isLogin();
+  }, [loginStatus, setStatus]);
+
   return (
     <BrowserRouter>
       <>
         <Switch>
-          <Route exact path="/" component={MainContainer} />
-          <Route path="/introduce" component={IntroduceContainer} />
+          <Route exact path="/">
+            <MainContainer loginStatus={loginStatus} />
+          </Route>
+          <Route exact path="/introduce">
+            <IntroduceContainer loginStatus={loginStatus} />
+          </Route>
+          <Route exact path="/review">
+            <ReviewContainer loginStatus={loginStatus} />
+          </Route>
+          <Route exact path="/announce">
+            <AnnounceContainer loginStatus={loginStatus} />
+          </Route>
           <Route path="/login" component={LoginContainer} />
-          <Route path="/review" component={ReviewPage} />
-          <Route path="/announce" component={AnnouncePage} />
+          <Redirect from="/logout" to="/" />
         </Switch>
       </>
     </BrowserRouter>

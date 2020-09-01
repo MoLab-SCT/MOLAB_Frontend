@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import axios from "axios";
 import logoWhite from "../../image/molab-logo-white.png";
 import logoBlack from "../../image/molab-logo-black.png";
 import classNames from "classnames";
 import "./Menu.scss";
 
-function MainMenu({ fontColor, logoColor }) {
-  let history = useHistory();
-
-  const [loginStatus, setStatus] = useState("");
-
-  useEffect(() => {
-    const isLogin = async () => {
-      const response = await axios({
-        method: "get",
-        withCredentials: true,
-        url: "/auth/islogin",
-      });
-      setStatus(response.data);
-    };
-    isLogin();
-  }, []);
-
+function MainMenu({ fontColor, logoColor, loginStatus }) {
   const logout = async () => {
-    const loginSuccess = await axios({
+    const logoutSuccess = await axios({
       method: "get",
       withCredentials: true,
       url: "/auth/logout",
     });
-    if (loginSuccess.data) {
-      history.push("/");
+    if (logoutSuccess.data) {
+      window.location.replace("/");
     }
   };
 
