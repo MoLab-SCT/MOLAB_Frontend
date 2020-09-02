@@ -9,7 +9,7 @@ html {
     margin: 0;
     padding: 0;
     border: 0;
-    overflow-x: hidden;
+    overflow-x: auto;
 
     .molab_wrapper {
       min-width: 1200px;
@@ -20,6 +20,8 @@ html {
 
     main {
       border-top: 1px solid #d8d8d8;
+      width: 100%;
+      min-width: 1200px;
     }
   }
 }
