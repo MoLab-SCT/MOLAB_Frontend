@@ -1,0 +1,136 @@
+.communication_wrapper_header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 20px;
+  border-bottom: 1px solid #d8d8d8;
+
+  h1 {
+    margin: 30px 5px 5px 5px;
+  }
+
+  p {
+    font-size: 15px;
+    word-break: break-all;
+  }
+
+  input {
+    width: 300px;
+    margin: 25px auto;
+  }
+
+  .suggest_btn {
+    border: 1px solid black;
+    border-radius: 25px;
+    width: 150px;
+    padding: 10px;
+    display: inline-block;
+    margin: 5px auto;
+  }
+
+  .process_group {
+    margin-bottom: 30px;
+    .process_elem {
+      display: inline-block;
+      width: 100px;
+      padding: 15px;
+      margin: 25px;
+      border: 1px solid rgba(241, 241, 241, 0.77);
+      border-radius: 5px;
+      -webkit-box-shadow: 5px 8px 6px -1px rgba(209, 209, 209, 0.77);
+      -moz-box-shadow: 5px 8px 6px -1px rgba(209, 209, 209, 0.77);
+      box-shadow: 5px 8px 6px -1px rgba(209, 209, 209, 0.77);
+      color: #4f4f4f;
+
+      &.active {
+        background-color: #6bcdff;
+        color: white;
+      }
+    }
+  }
+}
+
+.communication_wrapper_contents {
+  padding: 40px 30px 40px 30px;
+
+  h2 {
+    margin: 0;
+    display: inline-block;
+    color: #4f4f4f;
+  }
+
+  .sort_options {
+    float: right;
+    color: #4f4f4f;
+    input,
+    select {
+      margin: 0 10px 0 10px;
+    }
+
+    #category {
+      width: 170px;
+      height: 30px;
+    }
+  }
+
+  .communication_lists {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    .communication_list {
+      margin: 20px 20px 20px 0;
+      border: 1px solid #8d8d8d;
+      border-radius: 1em;
+
+      .list_upper {
+        border-bottom: 1px solid #8d8d8d;
+        padding: 10px;
+        .date {
+          float: right;
+        }
+      }
+      .list_content {
+        padding: 10px;
+        height: 220px;
+        p {
+          width: 528px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          word-wrap: break-word;
+          line-height: 1.2em;
+        }
+      }
+      .list_bottom {
+        border-top: 1px solid #8d8d8d;
+        padding: 10px;
+
+        .label {
+          float: right;
+          padding: 4px;
+          border-radius: 10px;
+          width: 46px;
+          text-align: center;
+          &.environment {
+            background-color: #8ce99a;
+          }
+
+          &.traffic {
+            background-color: #66d9e8;
+          }
+
+          &.welfare {
+            background-color: #ffe066;
+          }
+
+          &.energy {
+            background-color: #b197fc;
+          }
+        }
+      }
+    }
+  }
+}

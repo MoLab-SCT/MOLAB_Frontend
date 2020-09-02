@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import logoWhite from "../../image/molab-logo-white.png";
 import logoBlack from "../../image/molab-logo-black.png";
-import classNames from "classnames";
 import "./Menu.scss";
 
 function MainMenu({ fontColor, logoColor, loginStatus }) {

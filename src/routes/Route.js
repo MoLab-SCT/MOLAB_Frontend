@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
-import MainContainer from "../components/main/Main";
-import IntroduceContainer from "../components/introduce/Introduce";
-import LoginContainer from "../components/login/LoginContainer";
-import ReviewContainer from "../components/review/ReviewPage";
-import AnnounceContainer from "../components/announce/AnnouncePage";
+import MainPage from "../components/main/Main";
+import IntroducePage from "../components/introduce/Introduce";
+import LoginPage from "../components/login/LoginContainer";
+import ReviewPage from "../components/review/ReviewPage";
+import AnnouncePage from "../components/announce/AnnouncePage";
+import CommunicationPage from "../components/communication/CommunicationPage";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
@@ -28,18 +29,21 @@ function Router() {
       <>
         <Switch>
           <Route exact path="/">
-            <MainContainer loginStatus={loginStatus} />
+            <MainPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/introduce">
-            <IntroduceContainer loginStatus={loginStatus} />
+            <IntroducePage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/review">
-            <ReviewContainer loginStatus={loginStatus} />
+            <ReviewPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/announce">
-            <AnnounceContainer loginStatus={loginStatus} />
+            <AnnouncePage loginStatus={loginStatus} />
           </Route>
-          <Route path="/login" component={LoginContainer} />
+          <Route exact path="/communication">
+            <CommunicationPage loginStatus={loginStatus} />
+          </Route>
+          <Route path="/login" component={LoginPage} />
           <Redirect from="/logout" to="/" />
         </Switch>
       </>
