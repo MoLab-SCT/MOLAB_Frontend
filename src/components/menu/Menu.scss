@@ -42,28 +42,29 @@ header {
           padding: 5px;
           margin: 0 9px 0 9px;
 
-          &.white {
-            color: white;
-            &.login {
-              color: black;
-              background-color: white;
-            }
-          }
-
-          &.black {
-            color: black;
-            &.login {
-              color: white;
-              background-color: black;
-            }
-          }
-
           &:hover {
             color: #84cde5;
           }
         }
-        .active {
-          color: #84cde5;
+
+        a.white {
+          color: white;
+          &.login {
+            color: black;
+            background-color: white;
+          }
+        }
+
+        a.black {
+          color: black;
+          &.login {
+            color: white;
+            background-color: black;
+          }
+        }
+
+        a.active {
+          color: #84cde5 !important;
         }
       }
     }

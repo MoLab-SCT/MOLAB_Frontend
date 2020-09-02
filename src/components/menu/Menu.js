@@ -58,8 +58,9 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                 to="/introduce"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
+                className={fontColor}
               >
-                <div className={classNames("menu_item", fontColor)}>소개</div>
+                <div className="menu_item">소개</div>
               </NavLink>
             </li>
             <li>
@@ -67,10 +68,9 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                 to="/announce"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
+                className={fontColor}
               >
-                <div className={classNames("menu_item", fontColor)}>
-                  열린 참여
-                </div>
+                <div className="menu_item">열린 참여</div>
               </NavLink>
             </li>
 
@@ -79,8 +79,9 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                 to="/communication"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
+                className={fontColor}
               >
-                <div className={classNames("menu_item", fontColor)}>소통</div>
+                <div className="menu_item">소통</div>
               </NavLink>
             </li>
             <li>
@@ -88,8 +89,9 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                 to="/review"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
+                className={fontColor}
               >
-                <div className={classNames("menu_item", fontColor)}>후기</div>
+                <div className="menu_item">후기</div>
               </NavLink>
             </li>
             <li>
@@ -97,10 +99,9 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                 to="/network"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
+                className={fontColor}
               >
-                <div className={classNames("menu_item", fontColor)}>
-                  네트워크
-                </div>
+                <div className="menu_item">네트워크</div>
               </NavLink>
             </li>
             <li>
@@ -109,21 +110,18 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
                   to="/login"
                   style={{ textDecoration: "none" }}
                   activeClassName="active"
+                  className={fontColor}
                 >
-                  <div className={classNames("menu_item", fontColor)}>
-                    로그인
-                  </div>
+                  <div className="menu_item">로그인</div>
                 </NavLink>
               ) : (
                 <NavLink
                   to="/logout"
                   style={{ textDecoration: "none" }}
                   activeClassName="active"
+                  className={fontColor}
                 >
-                  <div
-                    className={classNames("menu_item", fontColor)}
-                    onClick={logout}
-                  >
+                  <div className="menu_item" onClick={logout}>
                     로그아웃
                   </div>
                 </NavLink>
