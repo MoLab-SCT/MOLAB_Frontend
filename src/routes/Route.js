@@ -7,6 +7,7 @@ import LoginPage from "../components/login/LoginContainer";
 import ReviewPage from "../components/review/ReviewPage";
 import AnnouncePage from "../components/announce/AnnouncePage";
 import CommunicationPage from "../components/communication/CommunicationPage";
+import ProjectFormPage from "../components/communication/ProjectForm";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
@@ -44,6 +45,9 @@ function Router() {
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
           <Route path="/login" component={LoginPage} />
+          <Route exact path="/register-project">
+            <ProjectFormPage loginStatus={loginStatus} />
+          </Route>
           <Redirect from="/logout" to="/" />
         </Switch>
       </>

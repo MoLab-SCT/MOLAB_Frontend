@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import "./CommunicationPage.scss";
@@ -21,7 +22,9 @@ function CommunicationHeader() {
         <br />
         지역 네트워크 구성원들과 함께 생각을 공유해보세요!
       </p>
-      <div className="suggest_btn">제안하기</div>
+      <NavLink to="/register-project" style={{ textDecoration: "none" }}>
+        <div className="suggest_btn">제안하기</div>
+      </NavLink>
       <div className="process_group">
         <b className="process_elem active" onClick={(e) => onToggle(e)}>
           문제 정의
