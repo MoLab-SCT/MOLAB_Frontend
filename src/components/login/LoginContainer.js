@@ -34,12 +34,18 @@ function LoginContainer() {
         pwd,
       },
       withCredentials: true,
-      url: "/login/general_login",
+      url: "api/login/general_login",
     });
     setLoading(false);
     if (response.data) {
       window.location.replace("/");
     }
+  };
+
+  const socialLogin = () => {
+    fetch("/api/login/naver", {
+      method: "GET",
+    }).then((res) => console.log);
   };
 
   if (loading) return <div>로딩 중</div>;
@@ -69,9 +75,16 @@ function LoginContainer() {
             로그인
           </button>
         </form>
-        <button className="common_button kakao">카카오로 로그인</button>
-        <button className="common_button naver">네이버로 로그인</button>
-        <button className="common_button google">구글로 로그인</button>
+        <a href="/api/login/kakao">
+          <button className="common_button kakao">카카오로 로그인</button>
+        </a>
+        <a href="/api/login/naver">
+          <button className="common_button naver">네이버로 로그인</button>
+        </a>
+
+        <Link to="/login/google">
+          <button className="common_button google">구글로 로그인</button>
+        </Link>
         <span>가입이 안 되어 있으신가요?</span>
         <Link to="/">
           <span className="form_btn signup_btn">회원가입</span>
