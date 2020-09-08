@@ -69,12 +69,12 @@ function ContentsSortArea() {
         <option value="energy">에너지</option>
         <option value="welfare">복지</option>
       </select>
-      <input type="radio" id="latest" name="sort" value="latest" checked />
-      <label for="latest">최신순</label>
+      <input type="radio" id="latest" name="sort" value="latest" />
+      <label htmlFor="latest">최신순</label>
       <input type="radio" id="word" name="sort" value="word" />
-      <label for="word">가나다순</label>
+      <label htmlFor="word">가나다순</label>
       <input type="radio" id="recommend" name="sort" value="reconmmend" />
-      <label for="recommend">추천순</label>
+      <label htmlFor="recommend">추천순</label>
     </section>
   );
 }

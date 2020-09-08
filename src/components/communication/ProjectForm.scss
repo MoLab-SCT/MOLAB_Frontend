@@ -1,0 +1,57 @@
+.project_form_wrapper {
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+
+  .project_form_header {
+    padding: 15px 0 15px 0;
+    border-bottom: 3px solid #84cde5;
+  }
+
+  .project_form {
+    section {
+      margin: 25px 0 25px 0;
+
+      label {
+        display: block;
+        margin: 10px 0 10px 0;
+        font-weight: bold;
+        color: grey;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        height: 35px;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+
+        &#title {
+          background-color: #ebf9fd;
+        }
+      }
+
+      #category {
+        width: 200px;
+        height: 25px;
+      }
+    }
+  }
+
+  .submit_button {
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border-style: none;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    background-color: #172945;
+    padding: 5px;
+  }
+}
