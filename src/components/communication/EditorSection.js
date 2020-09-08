@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { EditorState, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  convertToRaw,
+  convertFromHTML,
+  ContentState,
+} from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
 
 function EditorSection() {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const defaultContent = convertFromHTML(
+    "<p>[문제 해결의 필요성 : 왜 문제에 관심을 가지게 되었고, 왜 해결되어야 하는가?] </p><p>[문제와 관련된 이해관계자]</p><p>[실행 계획]</p>"
+  );
+
+  const sampleEditorContent = ContentState.createFromBlockArray(
+    defaultContent.contentBlocks
+  );
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(sampleEditorContent)
+  );
 
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);

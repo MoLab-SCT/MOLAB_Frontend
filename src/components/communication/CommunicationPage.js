@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import "./CommunicationPage.scss";
 import { AiFillCaretRight, AiFillLike, AiOutlineComment } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
 
 function CommunicationHeader() {
   const onToggle = (e) => {
@@ -81,44 +83,66 @@ function ContentsSortArea() {
 
 function CommunicationList({ list }) {
   const {
-    profile,
-    name,
-    date,
-    title,
-    content,
-    label,
-    recon_num,
+    com_profile,
+    com_name,
+    com_title,
+    com_date,
+    com_detailInfo,
+    com_cateogry,
+    recommend_num,
     comment_num,
   } = list;
 
-  const labelsMap = new Map([
-    ["환경", "environment"],
-    ["교통", "traffic"],
-    ["에너지", "energy"],
-    ["복지", "welfare"],
-  ]);
+  // const labelsMap = new Map([
+  //   ["환경", "environment"],
+  //   ["교통", "traffic"],
+  //   ["에너지", "energy"],
+  //   ["복지", "welfare"],
+  // ]);
 
   return (
     <div className="communication_list">
       <section className="list_upper">
-        <span className="name">{name}</span>
-        <span className="date">작성일 : {date}</span>
+        {com_profile ? (
+          com_profile
+        ) : (
+          <FaUserCircle
+            style={{
+              width: "1.5em",
+              height: "1.5em",
+              color: "gray",
+              verticalAlign: "middle",
+            }}
+          />
+        )}
+        <span className="name">{com_name}</span>
+        <span className="date">작성일 : {com_date}</span>
       </section>
       <section className="list_content">
-        <h3>{title}</h3>
-        <p>{content}</p>
+        <h3>{com_title}</h3>
+        <p>{com_detailInfo}</p>
       </section>
       <section className="list_bottom">
         <AiFillLike
-          style={{ width: "1.5em", height: "1.5em", color: "#4f4f4f" }}
+          style={{
+            width: "1.5em",
+            height: "1.5em",
+            color: "#4f4f4f",
+            verticalAlign: "middle",
+          }}
         />
-        <span>{recon_num}</span>
+        <span>{recommend_num}</span>
         <AiOutlineComment
-          style={{ width: "1.5em", height: "1.5em", color: "#4f4f4f" }}
+          style={{
+            width: "1.5em",
+            height: "1.5em",
+            color: "#4f4f4f",
+            verticalAlign: "middle",
+          }}
         />
         <span>{comment_num}</span>
-        <span className={classNames("label", labelsMap.get(label))}>
-          {label}
+        <span className={classNames("label", com_cateogry)}>
+          {com_cateogry}
         </span>
       </section>
     </div>
@@ -126,40 +150,29 @@ function CommunicationList({ list }) {
 }
 
 function CommunicationPage({ loginStatus }) {
-  const lists = [
-    {
-      id: 1,
-      profile: null,
-      name: "김민수",
-      date: "2020-04-12",
-      title: "청년을 위한 공간 마련 필요",
-      content:
-        "[ 문제 해결의 필요성 : 왜 문제에 관심을 가지게 되었고, 왜 해결되어야 하는가?] 대학생 공모전 출품을 위해 평균 10회의 오프라인 회의를 진행. 엔제리너스, 할리스 등 24시 카페를 개인 사비로 충당. 금액적 부담감이 있는 상황 [문제와 관련된 이해관계자] 카페 사장, 대학생 [실행 계획]- 동성로 인근에는 카페가 많은데 카페측과 협의하여 휴무일을 활용해, 카페 대관형식으로 청년들에게 스터디 공간을 제공하면 어떨까?- 카페 홍보에도 도움이 될 것이다.- 대관 행사를 통해 스터디 공간은 물론 다른 방식(플리마켓, 원데이클래스 등)으로 활용가능",
-      label: "환경",
-      recon_num: 2,
-      comment_num: 2,
-    },
-    {
-      id: 2,
-      profile: null,
-      name: "김민수",
-      date: "2020-04-12",
-      title: "청년을 위한 공간 마련 필요",
-      content:
-        "[ 문제 해결의 필요성 : 왜 문제에 관심을 가지게 되었고, 왜 해결되어야 하는가?] 대학생 공모전 출품을 위해 평균 10회의 오프라인 회의를 진행. 엔제리너스, 할리스 등 24시 카페를 개인 사비로 충당. 금액적 부담감이 있는 상황 [문제와 관련된 이해관계자] 카페 사장, 대학생 [실행 계획]- 동성로 인근에는 카페가 많은데 카페측과 협의하여 휴무일을 활용해, 카페 대관형식으로 청년들에게 스터디 공간을 제공하면 어떨까?- 카페 홍보에도 도움이 될 것이다.- 대관 행사를 통해 스터디 공간은 물론 다른 방식(플리마켓, 원데이클래스 등)으로 활용가능",
-      label: "환경",
-      recon_num: 2,
-      comment_num: 2,
-    },
-  ];
+  const [lists, setList] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
 
-  //   const [lists, setList] = useState(null);
-  //   const [loading, setLoading] = useState(null);
-  //   const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        setList(null);
+        setError(null);
+        setLoading(true);
+        const response = await axios.get("/communication");
+        setList(response.data);
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+    fetchList();
+  }, []);
 
-  //   if (loading) return <div>로딩 중</div>;
-  //   if (error) return <div>에러 발생</div>;
-  //   if (!lists) return null;
+  if (loading) return <div>로딩 중</div>;
+  if (error) return <div>에러 발생</div>;
+  if (!lists) return null;
 
   return (
     <div className="molab_wrppaer">
