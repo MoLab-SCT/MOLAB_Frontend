@@ -42,12 +42,6 @@ function LoginContainer() {
     }
   };
 
-  const socialLogin = () => {
-    fetch("/api/login/naver", {
-      method: "GET",
-    }).then((res) => console.log);
-  };
-
   if (loading) return <div>로딩 중</div>;
 
   return (
