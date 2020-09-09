@@ -160,7 +160,7 @@ function CommunicationPage({ loginStatus }) {
         setList(null);
         setError(null);
         setLoading(true);
-        const response = await axios.get("/communication");
+        const response = await axios.get("/api/communication");
         setList(response.data);
       } catch (e) {
         setError(e);
