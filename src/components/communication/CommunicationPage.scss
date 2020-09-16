@@ -52,7 +52,9 @@
 }
 
 .communication_wrapper_contents {
-  padding: 40px 30px 40px 30px;
+  width: 1140px;
+  margin: 0 auto;
+  padding: 40px 30px;
 
   h2 {
     margin: 0;
@@ -76,12 +78,18 @@
 
   .communication_lists {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
     margin-top: 30px;
+
     .communication_list {
-      margin: 20px 20px 20px 0;
       border: 1px solid #8d8d8d;
       border-radius: 1em;
+      margin: 20px 20px 20px 0;
+
+      &:nth-of-type(2n) {
+        margin: 20px 0 20px 20px;
+      }
 
       .list_upper {
         border-bottom: 1px solid #8d8d8d;
