@@ -80,7 +80,7 @@ function LoginContainer() {
           <button className="common_button google">구글로 로그인</button>
         </Link>
         <span>가입이 안 되어 있으신가요?</span>
-        <Link to="/">
+        <Link to="/signup">
           <span className="form_btn signup_btn">회원가입</span>
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import EditorSection from "./EditorSection";
 import Menu from "../menu/Menu";
@@ -9,7 +9,7 @@ import "./EditorSection.scss";
 
 function ProjectForm({ loginStatus }) {
   const [projectForm, setForm] = useState({
-    com_name: "",
+    comName: "",
     com_title: "",
     com_category: "",
     com_simpleInfo: "",
@@ -21,7 +21,17 @@ function ProjectForm({ loginStatus }) {
 
   const [loading, setLoading] = useState(null);
 
-  const { com_title, com_category, com_simpleInfo } = projectForm;
+  const {
+    com_title,
+    com_category,
+    com_simpleInfo,
+    com_detailInfo,
+  } = projectForm;
+
+  const title_ref = useRef(null);
+  const category_ref = useRef(null);
+  const simpleInfo_ref = useRef(null);
+  const detailInfo_ref = useRef(null);
 
   useEffect(() => {
     let today = new Date();
@@ -47,24 +57,50 @@ function ProjectForm({ loginStatus }) {
     [projectForm, setForm]
   );
 
-  const getEditorContents = (editorState) => {
-    setForm({
-      ...projectForm,
-      com_detailInfo: editorState,
-    });
+  const getEditorContents = useCallback(
+    (editorState) => {
+      setForm({
+        ...projectForm,
+        com_detailInfo: editorState,
+      });
+    },
+    [projectForm, setForm]
+  );
+
+  const formCheck = () => {
+    if (com_title === "") {
+      alert("제목을 작성하세요.");
+      title_ref.current.focus();
+      return false;
+    } else if (com_category === "") {
+      alert("카테고리를 선택하세요.");
+      category_ref.current.focus();
+      return false;
+    } else if (com_simpleInfo === "") {
+      alert("한 줄 소개를 작성하새요.");
+      simpleInfo_ref.current.focus();
+      return false;
+    } else if (com_detailInfo === "") {
+      alert("상세 내용을 작성하새요.");
+      window.scrollTo(0, detailInfo_ref.current.offsetTop);
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const formSubmit = async () => {
-    setLoading(true);
-    const response = await axios({
-      method: "post",
-      data: { projectForm: projectForm },
-      url: "api/communication/register_project",
-    });
-    setLoading(false);
-    if (response.data) {
-      console.log(response.data);
-      // window.location.replace("/communication");
+    if (formCheck()) {
+      setLoading(true);
+      const response = await axios({
+        method: "post",
+        data: { projectForm: projectForm },
+        url: "api/communication/register_project",
+      });
+      setLoading(false);
+      if (response.data) {
+        window.location.replace("/communication");
+      }
     }
   };
 
@@ -81,6 +117,7 @@ function ProjectForm({ loginStatus }) {
               <label htmlFor="com_title">제목 작성</label>
               <input
                 type="text"
+                ref={title_ref}
                 name="com_title"
                 id="title"
                 value={com_title}
@@ -95,6 +132,7 @@ function ProjectForm({ loginStatus }) {
                 id="category"
                 value={com_category}
                 onChange={formChange}
+                ref={category_ref}
               >
                 <option value="" disabled>
                   선택 없음
@@ -113,11 +151,13 @@ function ProjectForm({ loginStatus }) {
                 name="com_simpleInfo"
                 value={com_simpleInfo}
                 onChange={formChange}
+                ref={simpleInfo_ref}
               />
             </section>
-            <div className="editor">
+            <section className="editor" ref={detailInfo_ref}>
+              <label>상세 내용</label>
               <EditorSection getEditorContents={getEditorContents} />
-            </div>
+            </section>
             <section>
               <label htmlFor="addFile">기타 파일 첨부</label>
               <input type="file" name="addFile" />
