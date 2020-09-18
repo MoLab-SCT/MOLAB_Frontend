@@ -19,6 +19,8 @@ function ProjectForm({ loginStatus }) {
     comment_num: 0,
   });
 
+  const [file, setFile] = useState(null);
+
   const [loading, setLoading] = useState(null);
 
   const {
@@ -49,10 +51,14 @@ function ProjectForm({ loginStatus }) {
   const formChange = useCallback(
     (e) => {
       const { name, value } = e.target;
-      setForm({
-        ...projectForm,
-        [name]: value,
-      });
+      if (name === "addFile") {
+        setFile(e.target.files[0]);
+      } else {
+        setForm({
+          ...projectForm,
+          [name]: value,
+        });
+      }
     },
     [projectForm, setForm]
   );
@@ -92,12 +98,17 @@ function ProjectForm({ loginStatus }) {
   const formSubmit = async () => {
     if (formCheck()) {
       setLoading(true);
+      let formData = new FormData();
+      formData.append("projectForm", projectForm);
+      formData.append("file", file);
       const response = await axios({
         method: "post",
-        data: { projectForm: projectForm },
+        contentType: "multipart/form-data",
         url: "api/communication/register_project",
+        data: formData,
       });
       setLoading(false);
+
       if (response.data) {
         window.location.replace("/communication");
       }
@@ -160,7 +171,7 @@ function ProjectForm({ loginStatus }) {
             </section>
             <section>
               <label htmlFor="addFile">기타 파일 첨부</label>
-              <input type="file" name="addFile" />
+              <input type="file" name="addFile" onChange={formChange} />
             </section>
             <button
               type="button"
