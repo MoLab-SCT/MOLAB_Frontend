@@ -8,7 +8,6 @@ import ReviewPage from "../components/review/ReviewPage";
 import AnnouncePage from "../components/announce/AnnouncePage";
 import CommunicationPage from "../components/communication/CommunicationPage";
 import ProjectFormPage from "../components/communication/ProjectForm";
-import SignupPage from "../components/signup/SignupPage";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
@@ -33,24 +32,22 @@ function Router() {
           <Route exact path="/">
             <MainPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/introduce">
+          <Route path="/introduce">
             <IntroducePage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/review">
+          <Route path="/review">
             <ReviewPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/announce">
+          <Route path="/announce">
             <AnnouncePage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/communication">
+          <Route path="/communication">
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
           <Route path="/login" component={LoginPage} />
-          <Route exact path="/register-project">
+          <Route path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/signup">
-            <SignupPage />
           </Route>
           <Redirect from="/logout" to="/" />
         </Switch>

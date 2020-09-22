@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import "./CommunicationPage.scss";
 import { AiFillCaretRight, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
+import LoginPage from "../login/LoginContainer";
 
-function CommunicationHeader() {
+function CommunicationHeader({ loginStatus }) {
+  const history = useHistory();
+
   const onToggle = (e) => {
     let curElem = e.target;
     let prevElem = document.querySelectorAll("b.active")[0];
     prevElem.classList.remove("active");
     curElem.classList.add("active");
   };
+
+  const suggestBtnAction = () => {
+    if (!loginStatus) {
+      alert("로그인 후 이용하세요");
+      history.push("/login");
+    } else {
+      history.push("/register-project");
+    }
+  };
+
   return (
     <>
       <h1>요구사항 제안하기</h1>
@@ -24,9 +37,9 @@ function CommunicationHeader() {
         <br />
         지역 네트워크 구성원들과 함께 생각을 공유해보세요!
       </p>
-      <NavLink to="/register-project" style={{ textDecoration: "none" }}>
-        <div className="suggest_btn">제안하기</div>
-      </NavLink>
+      <div className="suggest_btn" onClick={() => suggestBtnAction()}>
+        제안하기
+      </div>
       <div className="process_group">
         <b className="process_elem active" onClick={(e) => onToggle(e)}>
           문제 정의
@@ -180,7 +193,7 @@ function CommunicationPage({ loginStatus }) {
       <main>
         <div className="communication_wrapper">
           <div className="communication_wrapper_header">
-            <CommunicationHeader />
+            <CommunicationHeader loginStatus={loginStatus} />
           </div>
           <div className="communication_wrapper_contents">
             <h2>문제 정의</h2>
