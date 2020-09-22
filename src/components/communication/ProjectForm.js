@@ -9,7 +9,7 @@ import "./EditorSection.scss";
 
 function ProjectForm({ loginStatus }) {
   const [projectForm, setForm] = useState({
-    comName: "",
+    com_name: "",
     com_title: "",
     com_category: "",
     com_simpleInfo: "",
@@ -99,7 +99,7 @@ function ProjectForm({ loginStatus }) {
     if (formCheck()) {
       setLoading(true);
       let formData = new FormData();
-      formData.append("projectForm", projectForm);
+      formData.append("projectForm", JSON.stringify(projectForm));
       formData.append("file", file);
       const response = await axios({
         method: "post",
