@@ -98,17 +98,17 @@ function ProjectForm({ loginStatus }) {
   const formSubmit = async () => {
     if (formCheck()) {
       setLoading(true);
+      
       let formData = new FormData();
       formData.append("projectForm", JSON.stringify(projectForm));
       formData.append("file", file);
+
       const response = await axios({
         method: "post",
-        contentType: "multipart/form-data",
+        data: { projectForm: projectForm },
         url: "api/communication/register_project",
-        data: formData,
       });
       setLoading(false);
-
       if (response.data) {
         window.location.replace("/communication");
       }

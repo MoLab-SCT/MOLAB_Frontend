@@ -8,7 +8,6 @@ import ReviewPage from "../components/review/ReviewPage";
 import AnnouncePage from "../components/announce/AnnouncePage";
 import CommunicationPage from "../components/communication/CommunicationPage";
 import ProjectFormPage from "../components/communication/ProjectForm";
-import SignupPage from "../components/signup/SignupPage";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
@@ -49,8 +48,6 @@ function Router() {
           <Route path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
-          <Route path="/signup">
-            <SignupPage />
           </Route>
           <Redirect from="/logout" to="/" />
         </Switch>
