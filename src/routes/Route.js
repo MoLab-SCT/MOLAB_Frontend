@@ -33,23 +33,23 @@ function Router() {
           <Route exact path="/">
             <MainPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/introduce">
+          <Route path="/introduce">
             <IntroducePage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/review">
+          <Route path="/review">
             <ReviewPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/announce">
+          <Route path="/announce">
             <AnnouncePage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/communication">
+          <Route path="/communication">
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
           <Route path="/login" component={LoginPage} />
-          <Route exact path="/register-project">
+          <Route path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <SignupPage />
           </Route>
           <Redirect from="/logout" to="/" />
