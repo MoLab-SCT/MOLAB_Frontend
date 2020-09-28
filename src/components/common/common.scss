@@ -1,0 +1,23 @@
+.label {
+  float: right;
+  padding: 4px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+
+  &.environment {
+    background-color: #8ce99a;
+  }
+
+  &.traffic {
+    background-color: #66d9e8;
+  }
+
+  &.welfare {
+    background-color: #ffe066;
+  }
+
+  &.energy {
+    background-color: #b197fc;
+  }
+}
