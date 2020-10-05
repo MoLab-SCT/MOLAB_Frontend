@@ -61,8 +61,6 @@ function Router() {
           <Route exact path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
-          <Route path="/signup">
-            <SignupPage />
           </Route>
           <Redirect from="/logout" to="/" />
         </Switch>
