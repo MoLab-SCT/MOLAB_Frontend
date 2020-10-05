@@ -106,6 +106,10 @@ function CommunicationList({ list }) {
     comment_num,
   } = list;
 
+  let tmp = document.createElement("div");
+  tmp.innerHTML = com_detailInfo;
+  let com_detailInfo_text = tmp.innerText;
+
   return (
     <div className="communication_list">
       <section className="list_upper">
@@ -129,7 +133,7 @@ function CommunicationList({ list }) {
       >
         <section className="list_content">
           <h3>{com_title}</h3>
-          <p>{com_detailInfo}</p>
+          <p>{com_detailInfo_text}</p>
         </section>
       </Link>
       <section className="list_bottom">
