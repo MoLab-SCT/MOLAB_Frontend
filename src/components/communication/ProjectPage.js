@@ -32,7 +32,7 @@ function ProcessBar() {
   );
 }
 
-function ProjectPage({ loginStatus }) {
+function ProjectPage({ loginStatus, loginName }) {
   const {
     location: {
       state: { list },
@@ -50,13 +50,6 @@ function ProjectPage({ loginStatus }) {
     com_detailInfo,
   } = list;
 
-  const labelsMap = new Map([
-    ["environment", "환경"],
-    ["traffic", "교통"],
-    ["energy", "에너지"],
-    ["welfare", "복지"],
-  ]);
-
   const ProfileImg = () => {
     return com_profile ? (
       com_profile
@@ -71,6 +64,13 @@ function ProjectPage({ loginStatus }) {
       />
     );
   };
+
+  const labelsMap = new Map([
+    ["environment", "환경"],
+    ["traffic", "교통"],
+    ["energy", "에너지"],
+    ["welfare", "복지"],
+  ]);
 
   return (
     <div className="molab_wrppaer">
@@ -115,7 +115,11 @@ function ProjectPage({ loginStatus }) {
           <div className="comment_field">
             <section className="comment_upper">
               <ProfileImg />
-              <span>이은아</span>
+              {loginName ? (
+                <span>{loginName}</span>
+              ) : (
+                <span>로그인 후 이용하세요</span>
+              )}
             </section>
             <textarea
               type="text"
