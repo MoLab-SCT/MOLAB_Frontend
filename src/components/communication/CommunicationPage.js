@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import "./CommunicationPage.scss";
 import { AiFillCaretRight, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
-import LoginPage from "../login/LoginContainer";
 
 function CommunicationHeader({ loginStatus }) {
   const history = useHistory();
@@ -96,6 +95,7 @@ function ContentsSortArea() {
 
 function CommunicationList({ list }) {
   const {
+    com_no,
     com_profile,
     com_name,
     com_title,
@@ -105,13 +105,6 @@ function CommunicationList({ list }) {
     recommend_num,
     comment_num,
   } = list;
-
-  // const labelsMap = new Map([
-  //   ["환경", "environment"],
-  //   ["교통", "traffic"],
-  //   ["에너지", "energy"],
-  //   ["복지", "welfare"],
-  // ]);
 
   return (
     <div className="communication_list">
@@ -131,10 +124,14 @@ function CommunicationList({ list }) {
         <span className="name">{com_name}</span>
         <span className="date">작성일 : {com_date}</span>
       </section>
-      <section className="list_content">
-        <h3>{com_title}</h3>
-        <p>{com_detailInfo}</p>
-      </section>
+      <Link
+        to={{ pathname: `/communication/project/${com_no}`, state: { list } }}
+      >
+        <section className="list_content">
+          <h3>{com_title}</h3>
+          <p>{com_detailInfo}</p>
+        </section>
+      </Link>
       <section className="list_bottom">
         <AiFillLike
           style={{
