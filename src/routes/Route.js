@@ -9,9 +9,12 @@ import AnnouncePage from "../components/announce/AnnouncePage";
 import CommunicationPage from "../components/communication/CommunicationPage";
 import ProjectFormPage from "../components/communication/ProjectForm";
 import SignupPage from "../components/signup/SignupPage";
+import ProjectPage from "../components/communication/ProjectPage";
+import { getUserInfo } from "../components/login/LoginFunction";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
+  const [loginName, setName] = useState("");
 
   useEffect(() => {
     const isLogin = async () => {
@@ -23,8 +26,14 @@ function Router() {
       setStatus(response.data);
     };
 
+    getUserInfo().then((res) => {
+      if (res.data.name) setName(res.data.name);
+    });
+
+    console.log(loginName);
+
     isLogin();
-  }, [loginStatus, setStatus]);
+  }, [loginStatus, setStatus, loginName]);
 
   return (
     <BrowserRouter>
@@ -33,20 +42,23 @@ function Router() {
           <Route exact path="/">
             <MainPage loginStatus={loginStatus} />
           </Route>
-          <Route path="/introduce">
+          <Route exact path="/introduce">
             <IntroducePage loginStatus={loginStatus} />
           </Route>
-          <Route path="/review">
+          <Route exact path="/review">
             <ReviewPage loginStatus={loginStatus} />
           </Route>
-          <Route path="/announce">
+          <Route exact path="/announce">
             <AnnouncePage loginStatus={loginStatus} />
           </Route>
-          <Route path="/communication">
+          <Route exact path="/communication">
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register-project">
+          <Route exact path="/communication/project/:id">
+            <ProjectPage loginStatus={loginStatus} loginName={loginName} />
+          </Route>
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
           <Route path="/signup">
