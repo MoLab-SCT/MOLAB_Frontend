@@ -15,6 +15,7 @@ import { getUserInfo } from "../components/login/LoginFunction";
 function Router() {
   const [loginStatus, setStatus] = useState(false);
   const [loginName, setName] = useState("");
+  const [loginId, setId] = useState("");
 
   useEffect(() => {
     const isLogin = async () => {
@@ -28,6 +29,7 @@ function Router() {
 
     getUserInfo().then((res) => {
       if (res.data.name) setName(res.data.name);
+      if (res.data.id) setId(res.data.id);
     });
 
     console.log(loginName);
@@ -55,14 +57,15 @@ function Router() {
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/communication/project/:id">
-            <ProjectPage loginStatus={loginStatus} loginName={loginName} />
+            <ProjectPage
+              loginStatus={loginStatus}
+              loginName={loginName}
+              loginId={loginId}
+            />
           </Route>
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
-          </Route>
-          <Route path="/signup">
-            <SignupPage />
           </Route>
           <Redirect from="/logout" to="/" />
         </Switch>

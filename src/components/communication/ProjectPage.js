@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { AiFillCaretRight, AiFillLike, AiOutlineComment } from "react-icons/ai";
+import {
+  AiFillCaretRight,
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineComment,
+} from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
@@ -32,7 +38,112 @@ function ProcessBar() {
   );
 }
 
-function ProjectPage({ loginStatus, loginName }) {
+/* 댓글 작성 창 */
+function CommentField({ loginName, com_no, getCommentList }) {
+  const commentRef = useRef(null);
+  const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(null);
+
+  const commentChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const submitComment = async () => {
+    if (comment === "") {
+      alert("댓글을 입력해주세요");
+    } else {
+      if (loginName) {
+        setLoading(true);
+        let date = new Date()
+          .toISOString()
+          .replace(/T/, " ")
+          .replace(/\..+/, "");
+        console.log(loginName, date, comment, com_no);
+        const response = await axios({
+          method: "post",
+          data: { loginName, date, comment, com_no },
+          url: "/api/communication/project/submit_comment",
+        });
+        setLoading(false);
+        if (response.data) {
+          setComment("");
+          getCommentList();
+        }
+      } else {
+        alert("로그인 후 이용하세요");
+        setComment("");
+      }
+    }
+  };
+
+  if (loading) return <div>로딩 중</div>;
+
+  return (
+    <div className="comment_field">
+      <textarea
+        type="text"
+        placeholder="문제 상황에 공감한다면, 같이 동참하세요!"
+        ref={commentRef}
+        value={comment}
+        onChange={commentChange}
+      ></textarea>
+      <button
+        type="button"
+        className="submit_comment"
+        onClick={() => submitComment()}
+      >
+        등록
+      </button>
+    </div>
+  );
+}
+
+/* 댓글 전체 리스트 */
+function CommentList({ commentList }) {
+  return (
+    <div className="comment_list">
+      {commentList.map((commentElem) => (
+        <section className="comment">
+          <span>{commentElem.username}</span>
+          <span>{commentElem.date}</span>
+          <p>{commentElem.comment}</p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function LikeIcon({ likeStatus, clickLike }) {
+  if (likeStatus) {
+    return (
+      <span onClick={() => clickLike()}>
+        <AiFillLike
+          style={{
+            width: "1.5em",
+            height: "1.5em",
+            color: "#4f4f4f",
+            verticalAlign: "middle",
+          }}
+        />
+      </span>
+    );
+  } else {
+    return (
+      <span onClick={() => clickLike()}>
+        <AiOutlineLike
+          style={{
+            width: "1.5em",
+            height: "1.5em",
+            color: "#4f4f4f",
+            verticalAlign: "middle",
+          }}
+        />
+      </span>
+    );
+  }
+}
+/* 메인 페이지 : 세부 프로젝트 페이지 */
+function ProjectPage({ loginStatus, loginName, loginId }) {
   const {
     location: {
       state: { list },
@@ -40,15 +151,16 @@ function ProjectPage({ loginStatus, loginName }) {
   } = useHistory();
 
   const {
+    com_no,
     com_title,
     com_profile,
-    recommend_num,
-    comment_num,
     com_name,
     com_category,
     com_date,
     com_detailInfo,
   } = list;
+
+  const [loading, setLoading] = useState(true);
 
   const ProfileImg = () => {
     return com_profile ? (
@@ -72,6 +184,67 @@ function ProjectPage({ loginStatus, loginName }) {
     ["welfare", "복지"],
   ]);
 
+  const [commentList, setCommentList] = useState([]);
+  const [likeList, setLikeList] = useState([]);
+  const [error, setError] = useState(null);
+  const [likeStatus, setStatus] = useState(false);
+
+  const getCommentList = async () => {
+    try {
+      const response = await axios({
+        method: "post",
+        data: { com_no },
+        url: "/api/communication/project/get_comment",
+      });
+      setCommentList(response.data);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  const getLikeList = async () => {
+    try {
+      const response = await axios({
+        method: "post",
+        data: { com_no },
+        url: "/api/communication/project/get_like",
+      });
+      setLikeList(response.data);
+      let likeListTemp = response.data;
+      for (let i = 0; i < likeListTemp.length; i++) {
+        if (likeListTemp[i].username === loginId) {
+          setStatus(true);
+          break;
+        }
+      }
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  const clickLike = async () => {
+    setStatus(!likeStatus);
+    try {
+      const response = await axios({
+        method: "post",
+        data: { com_no, loginId, likeStatus },
+        url: "/api/communication/project/click_like",
+      });
+      setLikeList(response.data);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getCommentList();
+    getLikeList();
+  }, []);
+
+  if (loading) return <div>로딩중</div>;
   return (
     <div className="molab_wrppaer">
       <Menu fontColor="black" logoColor="black" loginStatus={loginStatus} />
@@ -92,15 +265,8 @@ function ProjectPage({ loginStatus, loginName }) {
             </section>
             <section className="content">{parse(com_detailInfo)}</section>
             <section className="content_bottom">
-              <AiFillLike
-                style={{
-                  width: "1.5em",
-                  height: "1.5em",
-                  color: "#4f4f4f",
-                  verticalAlign: "middle",
-                }}
-              />
-              <span>{recommend_num}</span>
+              <LikeIcon likeStatus={likeStatus} clickLike={clickLike} />
+              <span>{likeList.length}</span>
               <AiOutlineComment
                 style={{
                   width: "1.5em",
@@ -109,26 +275,16 @@ function ProjectPage({ loginStatus, loginName }) {
                   verticalAlign: "middle",
                 }}
               />
-              <span>{comment_num}</span>
+              <span>{commentList.length}</span>
             </section>
           </div>
-          <div className="comment_field">
-            <section className="comment_upper">
-              <ProfileImg />
-              {loginName ? (
-                <span>{loginName}</span>
-              ) : (
-                <span>로그인 후 이용하세요</span>
-              )}
-            </section>
-            <textarea
-              type="text"
-              placeholder="문제 상황에 공감한다면, 같이 동참하세요!"
-            ></textarea>
-            <button type="button" className="submit_comment">
-              등록
-            </button>
-          </div>
+          <CommentList commentList={commentList} />
+          <CommentField
+            loginName={loginName}
+            ProfileImg={ProfileImg}
+            com_no={com_no}
+            getCommentList={getCommentList}
+          />
         </div>
       </main>
     </div>
