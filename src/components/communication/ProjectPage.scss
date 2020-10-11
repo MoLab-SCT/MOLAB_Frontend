@@ -44,6 +44,20 @@
       span {
         margin: 5px;
       }
+
+      .icon-comment {
+        width: 1.5em;
+        height: 1.5em;
+        color: #4f4f4f;
+        vertical-align: middle;
+      }
+
+      .icon-like {
+        width: 1.5em;
+        height: 1.5em;
+        color: #4f4f4f;
+        vertical-align: middle;
+      }
     }
   }
 
@@ -53,6 +67,7 @@
     width: 1080px;
     margin: 20px auto;
     overflow: auto;
+    text-align: center;
 
     .comment_upper {
       padding: 15px;
@@ -66,11 +81,12 @@
     }
 
     textarea {
-      margin: 0 15px 0 15px;
+      margin: 15px;
       width: 63.4rem;
       padding: 14px;
       overflow: auto;
       resize: none;
+      border-color: #e7e7e7;
     }
 
     .submit_comment {
@@ -80,7 +96,26 @@
       padding: 10px;
       color: white;
       float: right;
-      margin: 17px;
+      margin: 0 17px 17px 17px;
+    }
+  }
+
+  .comment_list {
+    width: 1070px;
+    margin: auto;
+    padding: 20px;
+
+    .comment {
+      margin-bottom: 2rem;
+      span:nth-child(1) {
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      span:nth-child(2) {
+        color: #727171;
+        font-size: 13px;
+        font-style: italic;
+      }
     }
   }
 }
@@ -112,5 +147,32 @@
 
   .triangle svg {
     vertical-align: text-bottom;
+  }
+}
+
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
