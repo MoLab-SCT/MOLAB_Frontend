@@ -7,12 +7,12 @@ import {
   AiFillLike,
   AiOutlineComment,
 } from "react-icons/ai";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaSpinner } from "react-icons/fa";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import parse from "html-react-parser";
 import "../common/common.scss";
-import "./ProjectPage.scss";
+import "./ProjectPage.scss"; 
 
 function ProcessBar() {
   const processItem = ["문제 정의", "실행 준비", "실행", "실행 완료"];
@@ -42,7 +42,6 @@ function ProcessBar() {
 function CommentField({ loginName, com_no, getCommentList }) {
   const commentRef = useRef(null);
   const [comment, setComment] = useState("");
-  const [loading, setLoading] = useState(null);
 
   const commentChange = (e) => {
     setComment(e.target.value);
@@ -53,7 +52,6 @@ function CommentField({ loginName, com_no, getCommentList }) {
       alert("댓글을 입력해주세요");
     } else {
       if (loginName) {
-        setLoading(true);
         let date = new Date()
           .toISOString()
           .replace(/T/, " ")
@@ -64,7 +62,6 @@ function CommentField({ loginName, com_no, getCommentList }) {
           data: { loginName, date, comment, com_no },
           url: "/api/communication/project/submit_comment",
         });
-        setLoading(false);
         if (response.data) {
           setComment("");
           getCommentList();
@@ -75,9 +72,6 @@ function CommentField({ loginName, com_no, getCommentList }) {
       }
     }
   };
-
-  if (loading) return <div>로딩 중</div>;
-
   return (
     <div className="comment_field">
       <textarea
@@ -100,48 +94,39 @@ function CommentField({ loginName, com_no, getCommentList }) {
 
 /* 댓글 전체 리스트 */
 function CommentList({ commentList }) {
+  let reverseCommentList = commentList.slice(0).reverse();
   return (
-    <div className="comment_list">
-      {commentList.map((commentElem) => (
+    <>
+      {reverseCommentList.map((commentElem) => (
         <section className="comment">
           <span>{commentElem.username}</span>
           <span>{commentElem.date}</span>
           <p>{commentElem.comment}</p>
         </section>
       ))}
-    </div>
+    </>
   );
 }
 
-function LikeIcon({ likeStatus, clickLike }) {
-  if (likeStatus) {
-    return (
-      <span onClick={() => clickLike()}>
-        <AiFillLike
-          style={{
-            width: "1.5em",
-            height: "1.5em",
-            color: "#4f4f4f",
-            verticalAlign: "middle",
-          }}
-        />
-      </span>
-    );
-  } else {
-    return (
-      <span onClick={() => clickLike()}>
-        <AiOutlineLike
-          style={{
-            width: "1.5em",
-            height: "1.5em",
-            color: "#4f4f4f",
-            verticalAlign: "middle",
-          }}
-        />
-      </span>
-    );
+function LikeIcon({ likeStatus, clickLike, likeList, loginId }) {
+
+  for (let i = 0; i < likeList.length; i++) {
+    if (likeList[i].username === loginId) {
+      likeStatus = true;
+      break;
+    }
+    else{
+      likeStatus = false;
+    }
   }
+
+  return(
+    <span onClick={() => clickLike(likeStatus)}>{likeStatus ?
+    <AiFillLike className="icon-like"/> : <AiOutlineLike className="icon-like"/>
+  }</span>
+  )
 }
+
 /* 메인 페이지 : 세부 프로젝트 페이지 */
 function ProjectPage({ loginStatus, loginName, loginId }) {
   const {
@@ -160,7 +145,8 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
     com_detailInfo,
   } = list;
 
-  const [loading, setLoading] = useState(true);
+  const [commentLoading, setComLoading] = useState(true);
+  const [likeLoading, setLikeLoading] = useState(true);
 
   const ProfileImg = () => {
     return com_profile ? (
@@ -191,6 +177,7 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
 
   const getCommentList = async () => {
     try {
+      setComLoading(true);
       const response = await axios({
         method: "post",
         data: { com_no },
@@ -200,31 +187,25 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
     } catch (e) {
       setError(e);
     }
-    setLoading(false);
+    setComLoading(false);
   };
 
   const getLikeList = async () => {
     try {
+      setLikeLoading(true);
       const response = await axios({
         method: "post",
         data: { com_no },
         url: "/api/communication/project/get_like",
       });
       setLikeList(response.data);
-      let likeListTemp = response.data;
-      for (let i = 0; i < likeListTemp.length; i++) {
-        if (likeListTemp[i].username === loginId) {
-          setStatus(true);
-          break;
-        }
-      }
     } catch (e) {
       setError(e);
     }
-    setLoading(false);
+    setLikeLoading(false);
   };
 
-  const clickLike = async () => {
+  const clickLike = async (likeStatus) => {
     setStatus(!likeStatus);
     try {
       const response = await axios({
@@ -236,15 +217,13 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
     } catch (e) {
       setError(e);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     getCommentList();
     getLikeList();
-  }, []);
+  }, [loginId, loginName]);
 
-  if (loading) return <div>로딩중</div>;
   return (
     <div className="molab_wrppaer">
       <Menu fontColor="black" logoColor="black" loginStatus={loginStatus} />
@@ -265,26 +244,22 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
             </section>
             <section className="content">{parse(com_detailInfo)}</section>
             <section className="content_bottom">
-              <LikeIcon likeStatus={likeStatus} clickLike={clickLike} />
+              {likeLoading ? <FaSpinner className="icon-spin" /> : <><LikeIcon likeStatus={likeStatus} clickLike={clickLike} likeList={likeList} loginId={loginId} />
               <span>{likeList.length}</span>
-              <AiOutlineComment
-                style={{
-                  width: "1.5em",
-                  height: "1.5em",
-                  color: "#4f4f4f",
-                  verticalAlign: "middle",
-                }}
-              />
-              <span>{commentList.length}</span>
+              <AiOutlineComment className="icon-comment"/>
+              <span>{commentList.length}</span></>}
             </section>
           </div>
-          <CommentList commentList={commentList} />
           <CommentField
             loginName={loginName}
             ProfileImg={ProfileImg}
             com_no={com_no}
             getCommentList={getCommentList}
           />
+          <div className="comment_list">
+          {commentLoading ? <FaSpinner className="icon-spin"/> : 
+          <CommentList commentList={commentList} />}
+          </div>
         </div>
       </main>
     </div>
