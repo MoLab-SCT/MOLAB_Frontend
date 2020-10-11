@@ -28,14 +28,16 @@ function Router() {
     };
 
     getUserInfo().then((res) => {
-      if (res.data.name) setName(res.data.name);
-      if (res.data.id) setId(res.data.id);
-    });
+      if (res.data.name){
+        setName(res.data.name)
+        setId(res.data.id);
+      };
+    })
 
-    console.log(loginName);
+    console.log(loginName, loginId);
 
     isLogin();
-  }, [loginStatus, setStatus, loginName]);
+  }, [loginStatus, setStatus, loginName, loginId]);
 
   return (
     <BrowserRouter>
