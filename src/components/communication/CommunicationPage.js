@@ -217,9 +217,7 @@ function CommunicationList({list, loginId}) {
         <span className="name">{com_name}</span>
         <span className="date">작성일 : {com_date}</span>
       </section>
-      <Link
-        to={{ pathname: `/communication/project/${com_no}`, state: { list } }}
-      >
+      <Link to={{ pathname: `/communication/project/${com_no}`, state: { list } }}>
         <section className="list_content">
           <h3>{com_title}</h3>
           <p>{com_detailInfo_text}</p>
