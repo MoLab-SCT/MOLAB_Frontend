@@ -54,7 +54,7 @@ function Router() {
             <AnnouncePage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/communication">
-            <CommunicationPage loginStatus={loginStatus} />
+            <CommunicationPage loginStatus={loginStatus} loginId={loginId}/>
           </Route>
           <Route exact path="/communication/project/:id">
             <ProjectPage
