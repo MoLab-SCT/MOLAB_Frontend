@@ -4,7 +4,7 @@ import axios from "axios";
 import Menu from "../menu/Menu";
 import classNames from "classnames";
 import "./CommunicationPage.scss";
-import { AiFillCaretRight, AiFillLike, AiOutlineComment } from "react-icons/ai";
+import { AiFillCaretRight, AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 
 function CommunicationHeader({ loginStatus }) {
@@ -93,7 +93,26 @@ function ContentsSortArea() {
   );
 }
 
-function CommunicationList({ list }) {
+function LikeIcon({ likeStatus, clickLike, likeList, loginId }) {
+
+  for (let i = 0; i < likeList.length; i++) {
+    if (likeList[i].username === loginId) {
+      likeStatus = true;
+      break;
+    }
+    else{
+      likeStatus = false;
+    }
+  }
+
+  return(
+    <span onClick={() => clickLike(likeStatus)}>{likeStatus ?
+    <AiFillLike className="icon-like"/> : <AiOutlineLike className="icon-like"/>
+  }</span>
+  )
+}
+
+function CommunicationList({list, loginId}) {
   const {
     com_no,
     com_profile,
@@ -102,14 +121,84 @@ function CommunicationList({ list }) {
     com_date,
     com_detailInfo,
     com_cateogry,
-    recommend_num,
-    comment_num,
   } = list;
 
   let tmp = document.createElement("div");
   tmp.innerHTML = com_detailInfo;
   let com_detailInfo_text = tmp.innerText;
 
+  const [commentList, setCommentList] = useState([]);
+  const [likeList, setLikeList] = useState([]);
+  const [commentLoading, setComLoading] = useState(true);
+  const [likeLoading, setLikeLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [likeStatus, setStatus] = useState(false);
+
+  useEffect(() => {
+
+    const getCommentList = async () => {
+      try {
+        setComLoading(true);
+        const response = await axios({
+          method: "post",
+          data: { com_no },
+          url: "/api/communication/project/get_comment",
+        });
+        setCommentList(response.data);
+      } catch (e) {
+        setError(e);
+      }
+      setComLoading(false);
+    };
+  
+    const getLikeList = async () => {
+      try {
+        setLikeLoading(true);
+        const response = await axios({
+          method: "post",
+          data: { com_no },
+          url: "/api/communication/project/get_like",
+        });
+        setLikeList(response.data);
+      } catch (e) {
+        setError(e);
+      }
+      setLikeLoading(false);
+    };
+
+    getCommentList();
+    getLikeList();
+
+  },[loginId]);
+
+  const clickLike = async (likeStatus) => {
+    setStatus(!likeStatus);
+    try {
+      const response = await axios({
+        method: "post",
+        data: { com_no, loginId, likeStatus },
+        url: "/api/communication/project/click_like",
+      });
+      setLikeList(response.data);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  if(commentLoading && likeLoading){ 
+    return (
+    <div className="communication_list">
+      <section className="list_upper loading">
+        <span className="non-profile"></span>
+      </section>
+      <section className="list_content loading">
+        <p className="non-text-h3"></p>
+        <p className="non-text-p"></p>
+      </section>
+      <section className="list_bottom loading">
+      </section>
+    </div>)
+  }
   return (
     <div className="communication_list">
       <section className="list_upper">
@@ -137,15 +226,8 @@ function CommunicationList({ list }) {
         </section>
       </Link>
       <section className="list_bottom">
-        <AiFillLike
-          style={{
-            width: "1.5em",
-            height: "1.5em",
-            color: "#4f4f4f",
-            verticalAlign: "middle",
-          }}
-        />
-        <span>{recommend_num}</span>
+        <LikeIcon likeStatus={likeStatus} clickLike={clickLike} likeList={likeList} loginId={loginId} />
+        <span>{likeList.length}</span>
         <AiOutlineComment
           style={{
             width: "1.5em",
@@ -154,7 +236,7 @@ function CommunicationList({ list }) {
             verticalAlign: "middle",
           }}
         />
-        <span>{comment_num}</span>
+        <span>{commentList.length}</span>
         <span className={classNames("label", com_cateogry)}>
           {com_cateogry}
         </span>
@@ -163,7 +245,7 @@ function CommunicationList({ list }) {
   );
 }
 
-function CommunicationPage({ loginStatus }) {
+function CommunicationPage({ loginStatus, loginId }) {
   const [lists, setList] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -201,7 +283,7 @@ function CommunicationPage({ loginStatus }) {
             <ContentsSortArea />
             <section className="communication_lists">
               {lists.map((list) => (
-                <CommunicationList list={list} key={list.id} />
+                <CommunicationList list={list} key={list.id} loginId={loginId}/>
               ))}
             </section>
           </div>
