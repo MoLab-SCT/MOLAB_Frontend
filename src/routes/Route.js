@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import MainPage from "../components/main/Main";
-import IntroducePage from "../components/introduce/Introduce";
+import IntroduceLivingLabPage from "../components/introduce/IntroduceLivingLabPage";
+import IntroduceSctPage from "../components/introduce/IntroduceSctPage";
 import LoginPage from "../components/login/LoginContainer";
 import ReviewPage from "../components/review/ReviewPage";
 import AnnouncePage from "../components/announce/AnnouncePage";
@@ -44,8 +45,11 @@ function Router() {
           <Route exact path="/">
             <MainPage loginStatus={loginStatus} />
           </Route>
-          <Route exact path="/introduce">
-            <IntroducePage loginStatus={loginStatus} />
+          <Route exact path="/whatisLivingLab">
+            <IntroduceLivingLabPage loginStatus={loginStatus} />
+          </Route>
+          <Route exact path="/teamSCT">
+            <IntroduceSctPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/review">
             <ReviewPage loginStatus={loginStatus} />
@@ -64,6 +68,7 @@ function Router() {
             />
           </Route>
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signup" component={SignupPage} loginStatus={loginStatus} />
           <Route exact path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
