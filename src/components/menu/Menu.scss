@@ -30,20 +30,53 @@ header {
 
   .header_menu {
     float: right;
+
     ul {
       list-style: none;
       display: inline-block;
       margin: 0;
+
+      #introduce {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      #introduce:hover .menu_sub_item {
+        display: block;
+      }
+
       li {
         display: inline-flex;
+
         .menu_item {
           text-decoration: none;
           font-weight: bold;
           padding: 5px;
           margin: 0 9px 0 9px;
-
           &:hover {
             color: #84cde5;
+          }
+        }
+
+        .menu_sub_item {
+          min-width: 150px;
+          margin: 0;
+          display: none;
+          position: absolute;
+          z-index: 1;
+          background-color: white;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+            0 6px 6px rgba(0, 0, 0, 0.23);
+
+          div {
+            color: black;
+            padding: 13px;
+            border-bottom: 1px solid #d8d8d8;
+
+            &:hover {
+              background-color: #d8d8d8;
+            }
           }
         }
 
