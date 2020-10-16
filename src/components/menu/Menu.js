@@ -52,15 +52,32 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
 
         <nav className="header_menu">
           <ul>
-            <li>
+              <li id="introduce">
+              <div className="menu_item">
+                <NavLink to="/whatisLivingLab"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+                className={fontColor}
+              >소개</NavLink>
+              </div>
+              <div className="menu_sub_item">
               <NavLink
-                to="/introduce"
+                to="/whatisLivingLab"
                 style={{ textDecoration: "none" }}
                 activeClassName="active"
                 className={fontColor}
               >
-                <div className="menu_item">소개</div>
+                <div>리빙랩 소개</div>
               </NavLink>
+              <NavLink
+                to="/teamSCT"
+                style={{ textDecoration: "none" }}
+                activeClassName="active"
+                className={fontColor}
+              >
+                <div>S.C.T 소개</div>
+              </NavLink>
+              </div>
             </li>
             <li>
               <NavLink
