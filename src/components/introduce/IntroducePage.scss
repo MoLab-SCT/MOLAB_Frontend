@@ -1,0 +1,43 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.introduce_header {
+  text-align: center;
+  background-color: #01a9db;
+  height: 71px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+
+  ul {
+    list-style: none;
+    color: white;
+    display: inline-flex;
+    justify-content: space-between;
+    margin: 0;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    li {
+      padding: 20px 20px 20px 20px;
+      margin: 5px 100px 5px 100px;
+    }
+
+    li:hover {
+      background-color: #0b2b3531;
+    }
+  }
+}
+
+.introduce_contents {
+  margin: 0 auto;
+  padding: 20px;
+
+  .highlight {
+    color: #01a9db;
+  }
+}
