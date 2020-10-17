@@ -11,6 +11,7 @@ import CommunicationPage from "../components/communication/CommunicationPage";
 import ProjectFormPage from "../components/communication/ProjectForm";
 import SignupPage from "../components/signup/SignupPage";
 import ProjectPage from "../components/communication/ProjectPage";
+import NetworkPage from "../components/network/NetworkPage";
 import { getUserInfo } from "../components/login/LoginFunction";
 
 function Router() {
@@ -53,6 +54,9 @@ function Router() {
           </Route>
           <Route exact path="/review">
             <ReviewPage loginStatus={loginStatus} />
+          </Route>
+          <Route exact path="/network">
+            <NetworkPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/announce">
             <AnnouncePage loginStatus={loginStatus} />
