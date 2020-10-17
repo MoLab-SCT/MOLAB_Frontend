@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Menu from "../menu/Menu";
+import Footer from "../footer/Footer";
 import axios from "axios";
 import "./ReviewPage.scss";
 
@@ -64,6 +65,7 @@ function ReviewPage({ loginStatus }) {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

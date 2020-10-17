@@ -6,6 +6,7 @@ import classNames from "classnames";
 import "./CommunicationPage.scss";
 import { AiFillCaretRight, AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
+import Footer from "../footer/Footer";
 
 function CommunicationHeader({ loginStatus }) {
   const history = useHistory();
@@ -120,8 +121,18 @@ function CommunicationList({list, loginId}) {
     com_title,
     com_date,
     com_detailInfo,
-    com_cateogry,
+    com_category
   } = list;
+
+  const labelsMap = new Map([
+    [ "environment","환경"],
+    ["traffic","교통"],
+    ["energy","에너지"],
+    ["welfare","복지"],
+  ]);
+
+
+  console.log(com_category);
 
   let tmp = document.createElement("div");
   tmp.innerHTML = com_detailInfo;
@@ -235,8 +246,8 @@ function CommunicationList({list, loginId}) {
           }}
         />
         <span>{commentList.length}</span>
-        <span className={classNames("label", com_cateogry)}>
-          {com_cateogry}
+        <span className={classNames("label", com_category)}>
+          {labelsMap.get(com_category)}
         </span>
       </section>
     </div>
@@ -277,16 +288,17 @@ function CommunicationPage({ loginStatus, loginId }) {
             <CommunicationHeader loginStatus={loginStatus} />
           </div>
           <div className="communication_wrapper_contents">
-            <h2>문제 정의</h2>
+            <h2>문제 정의 ({lists.length})</h2>
             <ContentsSortArea />
             <section className="communication_lists">
-              {lists.map((list) => (
+              {lists.reverse().map((list) => (
                 <CommunicationList list={list} key={list.id} loginId={loginId}/>
               ))}
             </section>
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
