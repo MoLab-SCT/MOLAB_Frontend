@@ -15,8 +15,6 @@ function ProjectForm({ loginStatus }) {
     com_simpleInfo: "",
     com_detailInfo: "",
     com_date: "",
-    recommend_num: 0,
-    comment_num: 0,
   });
 
   const [file, setFile] = useState(null);
