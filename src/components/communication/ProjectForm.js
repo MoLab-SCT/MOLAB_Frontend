@@ -103,9 +103,11 @@ function ProjectForm({ loginStatus }) {
 
       const response = await axios({
         method: "post",
-        data: { projectForm: projectForm },
+        data: formData,
+        contentType: "multipart/form-data",
         url: "api/communication/register_project",
       });
+      
       setLoading(false);
       if (response.data) {
         window.location.replace("/communication");
