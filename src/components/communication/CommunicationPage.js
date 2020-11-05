@@ -75,26 +75,27 @@ function CommunicationHeader({ loginStatus }) {
   );
 }
 
-function ContentsSortArea() {
+function ContentsSortArea({sortByOption, sortByCategory}) {
   return (
     <section className="sort_options">
-      <select name="category" id="category">
+      <select name="category" id="category" onChange={sortByCategory}>
+        <option value="default">전체</option>
         <option value="environment">환경</option>
         <option value="traffic">교통</option>
         <option value="energy">에너지</option>
         <option value="welfare">복지</option>
       </select>
-      <input type="radio" id="latest" name="sort" value="latest" />
-      <label htmlFor="latest">최신순</label>
-      <input type="radio" id="word" name="sort" value="word" />
-      <label htmlFor="word">가나다순</label>
-      <input type="radio" id="recommend" name="sort" value="reconmmend" />
-      <label htmlFor="recommend">추천순</label>
+      
+      <label htmlFor="latest"><input type="radio" id="latest" name="sort" value="latest" defaultChecked onClick={sortByOption} />최신순</label>
+     
+      <label htmlFor="word"> <input type="radio" id="word" name="sort" value="spell" onClick={sortByOption}/>가나다순</label>
+      
+      <label htmlFor="recommend"><input type="radio" id="recommend" name="sort" value="like" onClick={sortByOption}/>추천순</label>
     </section>
   );
 }
 
-function LikeIcon({ likeStatus, clickLike, likeList, loginId }) {
+function LikeIcon({ likeStatus, clickLike, likeList, loginId}) {
 
   for (let i = 0; i < likeList.length; i++) {
     if (likeList[i].username === loginId) {
@@ -131,9 +132,6 @@ function CommunicationList({list, loginId}) {
     ["welfare","복지"],
   ]);
 
-
-  console.log(com_category);
-
   let tmp = document.createElement("div");
   tmp.innerHTML = com_detailInfo;
   let com_detailInfo_text = tmp.innerText;
@@ -160,6 +158,7 @@ function CommunicationList({list, loginId}) {
         setError(e);
       }
       setComLoading(false);
+
     };
   
     const getLikeList = async () => {
@@ -180,20 +179,26 @@ function CommunicationList({list, loginId}) {
     getCommentList();
     getLikeList();
 
-  },[loginId]);
+  },[com_no]);
 
   const clickLike = async (likeStatus) => {
-    setStatus(!likeStatus);
-    try {
-      const response = await axios({
-        method: "post",
-        data: { com_no, loginId, likeStatus },
-        url: "/api/communication/project/click_like",
-      });
-      setLikeList(response.data);
-    } catch (e) {
-      setError(e);
+    if(loginId === ""){
+      alert("로그인 후 이용하세요");
     }
+    else{
+      setStatus(!likeStatus);
+      try {
+        const response = await axios({
+          method: "post",
+          data: { com_no, loginId, likeStatus },
+          url: "/api/communication/project/click_like",
+        });
+        setLikeList(response.data);
+      } catch (e) {
+        setError(e);
+      }
+    }
+    
   };
 
   if(commentLoading && likeLoading){ 
@@ -235,7 +240,7 @@ function CommunicationList({list, loginId}) {
         </section>
       </Link>
       <section className="list_bottom">
-        <LikeIcon likeStatus={likeStatus} clickLike={clickLike} likeList={likeList} loginId={loginId} />
+        <LikeIcon likeStatus={likeStatus} clickLike={clickLike} loginId={loginId} likeList={likeList}/>
         <span>{likeList.length}</span>
         <AiOutlineComment
           style={{
@@ -255,7 +260,13 @@ function CommunicationList({list, loginId}) {
 }
 
 function CommunicationPage({ loginStatus, loginId }) {
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
+  
   const [lists, setList] = useState(null);
+  const [initialList, setInitialList] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
 
@@ -266,7 +277,8 @@ function CommunicationPage({ loginStatus, loginId }) {
         setError(null);
         setLoading(true);
         const response = await axios.get("/api/communication");
-        setList(response.data);
+        setList(response.data.reverse());
+        setInitialList(response.data);
       } catch (e) {
         setError(e);
       }
@@ -274,6 +286,49 @@ function CommunicationPage({ loginStatus, loginId }) {
     };
     fetchList();
   }, []);
+
+  const sortByOption = (e) => {
+    console.log(e.target.value);
+
+    let sortedList = [];
+
+    if(e.target.value === "latest"){
+      sortedList = lists.sort((a,b) => b.com_no - a.com_no);
+    }
+    else if(e.target.value === "like"){
+      sortedList = lists.sort((a,b) => b.com_like - a.com_like);
+    }
+    else{
+      const compareString = (a,b) => {
+        if(a>b) return 1;
+        else if(b>a) return -1;
+        else return 0;
+      }
+      sortedList = lists.sort((a,b) => compareString(a.com_title, b.com_title));
+    }
+
+    console.log(sortedList);
+    setList([...sortedList]);
+  }
+
+  const sortByCategory = (e) => {
+  
+    let sortedList;
+    let radioBtn = document.getElementById("latest");
+    radioBtn.defaultChecked = true;
+
+    if(["environment","traffic","energy","welfare"].includes(e.target.value)){
+      sortedList = initialList.filter(list => list.com_category === e.target.value);
+    }
+    else{
+      if("default" === e.target.value){
+        sortedList = initialList;
+      }
+    }
+
+    sortedList.sort((a,b) => b.com_no - a.com_no);
+    setList(sortedList);
+  }
 
   if (loading) return <div>로딩 중</div>;
   if (error) return <div>에러 발생</div>;
@@ -285,14 +340,14 @@ function CommunicationPage({ loginStatus, loginId }) {
       <main>
         <div className="communication_wrapper">
           <div className="communication_wrapper_header">
-            <CommunicationHeader loginStatus={loginStatus} />
+            <CommunicationHeader loginStatus={loginStatus}/>
           </div>
           <div className="communication_wrapper_contents">
             <h2>문제 정의 ({lists.length})</h2>
-            <ContentsSortArea />
+            <ContentsSortArea sortByOption={sortByOption}  sortByCategory={sortByCategory}/>
             <section className="communication_lists">
-              {lists.reverse().map((list) => (
-                <CommunicationList list={list} key={list.id} loginId={loginId}/>
+              {lists.map((list) => (
+                <CommunicationList list={list} key={list.id} loginId={loginId} loginStatus={loginStatus}/>
               ))}
             </section>
           </div>
