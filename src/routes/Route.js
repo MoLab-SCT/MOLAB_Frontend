@@ -72,14 +72,16 @@ function Router() {
             />
           </Route>
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignupPage} loginStatus={loginStatus} />
+          <Route exact path="/signup">
+            <SignupPage loginStatus={loginStatus} />
+          </Route>
           <Route exact path="/register-project">
             <ProjectFormPage loginStatus={loginStatus} />
           </Route>
           <Redirect from="/logout" to="/" />
         </Switch>
       </>
-    </BrowserRouter>
+    </BrowserRouter> 
   );
 }
 
