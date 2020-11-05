@@ -14,6 +14,10 @@ import parse from "html-react-parser";
 import "../common/common.scss";
 import "./ProjectPage.scss"; 
 
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 function ProcessBar() {
   const processItem = ["문제 정의", "실행 준비", "실행", "실행 완료"];
   return (
@@ -129,6 +133,7 @@ function LikeIcon({ likeStatus, clickLike, likeList, loginId }) {
 
 /* 메인 페이지 : 세부 프로젝트 페이지 */
 function ProjectPage({ loginStatus, loginName, loginId }) {
+
   const {
     location: {
       state: { list },
@@ -175,7 +180,7 @@ function ProjectPage({ loginStatus, loginName, loginId }) {
   const [error, setError] = useState(null);
   const [likeStatus, setStatus] = useState(false);
 
-  const getCommentList = async () => {
+  const getCommentList = async (e) => {
     try {
       setComLoading(true);
       const response = await axios({
