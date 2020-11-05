@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import { Link } from "react-router-dom";
@@ -6,15 +6,30 @@ import { Link } from "react-router-dom";
 import "./LoginContainer.scss";
 import Logo from "../../image/molab-logo-black.png";
 
+const RSA = require("node-rsa");
+const rsa = new RSA();
+
 function LoginContainer() {
+
+  const [publicKey, setPublicKey] = useState("");
   const [userInfo, setUserinfo] = useState({
     id: "",
     pwd: "",
   });
-
   const [loading, setLoading] = useState(null);
-
   const { id, pwd } = userInfo;
+
+  useEffect(() => {
+    const getRSA = async () => {
+      const response = await axios({
+        method: "get",
+        url: "/api/login",
+      });
+      setPublicKey(response.data);
+    }
+    getRSA();
+  },[]);
+
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -26,12 +41,14 @@ function LoginContainer() {
   };
 
   const loginCheck = async () => {
+    rsa.importKey(publicKey, "public");
+    var encPw = rsa.encrypt(pwd, "base64", "utf-8");
     setLoading(true);
     const response = await axios({
       method: "post",
       data: {
         id,
-        pwd,
+        encPw,
       },
       withCredentials: true,
       url: "api/login/general_login",
