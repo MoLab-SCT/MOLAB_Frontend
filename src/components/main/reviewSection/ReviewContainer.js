@@ -9,7 +9,7 @@ function ReviewContainer() {
     infinite: true,
     autoplay: true,
     dots: true,
-    centerPadding: "100px",
+    centerPadding: "10px",
     slidesToShow: 3,
     speed: 500,
     arrows: false,
