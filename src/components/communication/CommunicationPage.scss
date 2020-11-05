@@ -21,12 +21,18 @@
   }
 
   .suggest_btn {
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 25px;
     width: 150px;
     padding: 10px;
     display: inline-block;
     margin: 5px auto;
+
+    &:hover {
+      cursor: pointer;
+      background-color: grey;
+      color: white;
+    }
   }
 
   .process_group {
