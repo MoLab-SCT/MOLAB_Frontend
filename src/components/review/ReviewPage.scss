@@ -68,3 +68,33 @@
     }
   }
 }
+
+.review_list_sort {
+  margin: 20px auto;
+  width: 900px;
+
+  #category {
+    width: 180px;
+    padding: 10px;
+    border-radius: 0.4rem;
+  }
+}
+
+.review_pagination {
+  width: 900px;
+  margin: 25px auto;
+  text-align: center;
+  ul {
+    list-style: none;
+    display: inline-flex;
+
+    li {
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    & .current {
+      text-decoration: underline;
+    }
+  }
+}
