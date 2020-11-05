@@ -19,14 +19,22 @@
   box-shadow: 3px 15px 14px 5px #f3f3f3;
   background-color: white;
   margin-top: 15px;
-  padding: 14px;
+  padding: 18px;
+
+  h3 {
+    padding: 14px;
+    border-bottom: 1px solid #d8d8d8;
+    margin: 0;
+    text-align: center;
+  }
+
+  p {
+    margin: 25px 0;
+  }
 }
 
-.review_contents h3 {
-  padding: 14px;
-  border-bottom: 1px solid #d8d8d8;
-  margin: 0;
-  text-align: center;
+.btn_more {
+  float: right;
 }
 
 .slick-slide.slick-center .review_contents {
