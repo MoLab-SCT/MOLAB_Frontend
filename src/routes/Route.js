@@ -10,11 +10,13 @@ import CommunicationPage from "../components/communication/CommunicationPage";
 import ProjectFormPage from "../components/communication/ProjectForm";
 import SignupPage from "../components/signup/SignupPage";
 import ProjectPage from "../components/communication/ProjectPage";
+import AnnounceDetail from "../components/announce/AnnounceDetail";
 import { getUserInfo } from "../components/login/LoginFunction";
 
 function Router() {
   const [loginStatus, setStatus] = useState(false);
   const [loginName, setName] = useState("");
+  const [loginId, setId] = useState("");
 
   useEffect(() => {
     const isLogin = async () => {
@@ -49,8 +51,24 @@ function Router() {
             <ReviewPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/announce">
-            <AnnouncePage loginStatus={loginStatus} />
+            <AnnouncePage
+              loginStatus={loginStatus}
+              loginName={loginName}
+              loginId={loginId}
+            />
           </Route>
+          <Route
+            exact
+            path="/announce/:no"
+            render={(props) => (
+              <AnnounceDetail
+                loginStatus={loginStatus}
+                loginName={loginName}
+                loginId={loginId}
+                {...props}
+              />
+            )}
+          />
           <Route exact path="/communication">
             <CommunicationPage loginStatus={loginStatus} />
           </Route>
