@@ -20,6 +20,7 @@
     "react-draft-wysiwyg": "^1.14.5",
     "react-icons": "^3.11.0",
     "react-iframe": "^1.8.0",
+    "react-pagination-js": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-slick": "^0.27.5",

@@ -16,9 +16,40 @@
     font-size: 18px;
   }
 
-  input {
-    width: 300px;
-    margin: 25px auto;
+  .select_wrapper {
+    text-align: right;
+    padding: 0px 100px;
+    select {
+      width: 150px;
+      height: 30px;
+    }
+  }
+
+  .search_text {
+    width: 350px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 24px;
+    padding: 0 8px 0 22px;
+  }
+
+  .search_events_area {
+    position: relative;
+    width: 400px;
+    margin: 40px auto;
+  }
+
+  .search_events_btn {
+    background: url("../../image/searchicon.png") no-repeat 4px 4px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-size: 33px;
+    position: absolute;
+    top: 0;
+    right: 37px;
+    box-sizing: border-box;
+    text-indent: -9999em;
   }
 }
 
@@ -26,12 +57,12 @@
   display: flex;
   flex-wrap: wrap;
   padding: 15px;
+  justify-content: center;
 
   .announce_list {
-    width: 270px;
-    border: 1px solid #b6b6b6;
-    padding: 10px;
-    margin: 8px;
+    margin: 20px;
+    border: 1px solid #d8d8d8;
+    box-sizing: border-box;
     cursor: pointer;
 
     &:hover {
@@ -42,26 +73,46 @@
       }
     }
 
-    img {
-      display: block;
-      height: 338px;
-      width: 265px;
-      margin: auto;
+    .event_thumb {
+      margin: 20px 20px 0 20px;
+      text-align: center;
+
+      img {
+        width: 300px;
+        height: 300px;
+      }
     }
 
-    p {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 18px;
-    }
+    .event_info {
+      height: 120px;
 
-    span {
-      font-size: 13px;
+      h3 {
+        width: 300px;
+        font-size: 15px;
+        padding: 12px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
 
-      &.more_btn {
-        float: right;
+      .event_info_span {
+        margin: 0 auto;
+        width: 300px;
+        padding: 12px;
+
+        span:last-child {
+          float: right;
+        }
+      }
+
+      .event_response {
+        margin: 0 auto;
+        width: 300px;
       }
     }
   }
+}
+
+.pagination_wrapper {
+  text-align: center;
+  padding: 15px;
 }

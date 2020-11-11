@@ -12,6 +12,7 @@ import ProjectFormPage from "../components/communication/ProjectForm";
 import SignupPage from "../components/signup/SignupPage";
 import ProjectPage from "../components/communication/ProjectPage";
 import NetworkPage from "../components/network/NetworkPage";
+import AnnounceDetail from "../components/announce/AnnounceDetail";
 import { getUserInfo } from "../components/login/LoginFunction";
 
 function Router() {
@@ -59,10 +60,26 @@ function Router() {
             <NetworkPage loginStatus={loginStatus} />
           </Route>
           <Route exact path="/announce">
-            <AnnouncePage loginStatus={loginStatus} />
+            <AnnouncePage
+              loginStatus={loginStatus}
+              loginName={loginName}
+              loginId={loginId}
+            />
           </Route>
+          <Route
+            exact
+            path="/announce/:no"
+            render={(props) => (
+              <AnnounceDetail
+                loginStatus={loginStatus}
+                loginName={loginName}
+                loginId={loginId}
+                {...props}
+              />
+            )}
+          />
           <Route exact path="/communication">
-            <CommunicationPage loginStatus={loginStatus} loginId={loginId}/>
+            <CommunicationPage loginStatus={loginStatus} loginId={loginId} />
           </Route>
           <Route exact path="/communication/project/:id">
             <ProjectPage
@@ -81,7 +98,7 @@ function Router() {
           <Redirect from="/logout" to="/" />
         </Switch>
       </>
-    </BrowserRouter> 
+    </BrowserRouter>
   );
 }
 
