@@ -30,6 +30,7 @@ function Router() {
 
     getUserInfo().then((res) => {
       if (res.data.name) setName(res.data.name);
+      if (res.data.id) setId(res.data.id);
     });
 
     console.log(loginName);
@@ -70,10 +71,14 @@ function Router() {
             )}
           />
           <Route exact path="/communication">
-            <CommunicationPage loginStatus={loginStatus} />
+            <CommunicationPage loginStatus={loginStatus} loginId={loginId}/>
           </Route>
           <Route exact path="/communication/project/:id">
-            <ProjectPage loginStatus={loginStatus} loginName={loginName} />
+            <ProjectPage
+              loginStatus={loginStatus}
+              loginName={loginName}
+              loginId={loginId}
+            />
           </Route>
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register-project">

@@ -86,6 +86,7 @@
       border: 1px solid #8d8d8d;
       border-radius: 1em;
       margin: 20px 20px 20px 0;
+      min-width: 548px;
 
       &:nth-of-type(2n) {
         margin: 20px 0 20px 20px;
@@ -94,13 +95,49 @@
       .list_upper {
         border-bottom: 1px solid #8d8d8d;
         padding: 10px;
+        min-height: 25px;
+
+        &.loading {
+          .non-profile {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            background-color: #8d8d8d;
+            vertical-align: middle;
+            border-radius: 50%;
+            animation: fading 1.5s infinite;
+          }
+        }
         .date {
           float: right;
         }
       }
+
       .list_content {
         padding: 10px;
         height: 220px;
+        min-height: 220px;
+
+        &.loading {
+          .non-text-h3,
+          .non-text-p {
+            height: 20px;
+            margin: 3px 0;
+            opacity: 0.2;
+            animation: fading 1.5s infinite;
+            border-radius: 100px;
+            margin: 18px 0;
+          }
+          .non-text-p {
+            background-color: #8d8d8d;
+            width: 200px;
+          }
+          .non-text-h3 {
+            background-color: rgb(104, 104, 104);
+            content: " ";
+          }
+        }
+
         p {
           width: 528px;
           overflow: hidden;
@@ -112,9 +149,19 @@
           line-height: 1.2em;
         }
       }
+
       .list_bottom {
         border-top: 1px solid #8d8d8d;
         padding: 10px;
+        min-height: 25px;
+
+        .icon-like {
+          width: 1.5em;
+          height: 1.5em;
+          color: #4f4f4f;
+          vertical-align: middle;
+          cursor: pointer;
+        }
 
         .label {
           float: right;
@@ -140,5 +187,19 @@
         }
       }
     }
+  }
+}
+
+@keyframes fading {
+  0% {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.1;
   }
 }
