@@ -42,10 +42,30 @@ function EditorSection({ getEditorContents }) {
           }}
           toolbar={{
             inline: { inDropdown: true },
+            blockType : {inDropdown : true},
+            fontSize : {inDropdown : true},
+            fontFamily : {inDropdown : true},
             list: { inDropdown: true },
             textAlign: { inDropdown: true },
+            colorPicker : {inDropdown : true},
             link: { inDropdown: true },
+            embedded : {inDropdown : true},
+            image : {inDropdown : true},
             history: { inDropdown: true },
+            options :
+            ['inline',
+              'blockType',
+              'fontSize',
+              'fontFamily',
+              'list',
+              'textAlign',
+              'colorPicker',
+              'link',
+              'embedded'
+              /*, 'emoji'*/,
+              'image',
+              'remove',
+              'history']
           }}
           editorState={editorState}
           onEditorStateChange={onEditorStateChange}
