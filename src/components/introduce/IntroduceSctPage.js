@@ -10,7 +10,7 @@ return(
         <Menu fontColor="black" logoColor="black" loginStatus={loginStatus} />
         <main>
             <div className="introduce_wrapper">
-                <div className="introduce_header">
+                <div className="introduce_header" id="sct_header">
                     <ul>
                         <a href="#sct"><li>팀 S.C.T 소개</li></a>
                         <a href="#molab"><li>MOLAB 소개</li></a>
@@ -94,7 +94,7 @@ return(
                                 </p>
                             </div>
                             <div className="profile">
-                                <img src={require("./img/ys.png")} alt="이은아" />
+                                <img src={require("./img/eun.jpg")} alt="이은아" />
                                 <h3>이은아</h3>
                                 <b>웹 개발</b>
                                 <p>
@@ -124,7 +124,7 @@ return(
                         <hr id="dot_line"/>
                         <section className="molab_diagram">
                             <h2>MOLAB은</h2>
-                            <p>'배달의 민족처럼'시민(이용자)와 지자체(주최자를) 연결해주는 중간 역할</p>
+                            <p>'배달의 민족처럼'시민(이용자)와 지자체(주최자를) 연결해주는 중간 역할입니다.</p>
                             <img src={require("./img/gujo.png")} alt="molab_diagram" />
                         </section>
                         
