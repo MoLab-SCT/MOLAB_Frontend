@@ -54,7 +54,10 @@ function LoginContainer() {
       url: "api/login/general_login",
     });
     setLoading(false);
-    if (response.data) {
+    if (!response.data) {
+      alert("로그인 정보가 잘못 되었습니다!");
+    }
+    else{
       window.location.replace("/");
     }
   };
@@ -93,9 +96,6 @@ function LoginContainer() {
           <button className="common_button naver">네이버로 로그인</button>
         </a>
 
-        <Link to="/login/google">
-          <button className="common_button google">구글로 로그인</button>
-        </Link>
         <span>가입이 안 되어 있으신가요?</span>
         <Link to="/signup">
           <span className="form_btn signup_btn">회원가입</span>
