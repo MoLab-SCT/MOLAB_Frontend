@@ -41,9 +41,6 @@
   }
 
   .submit_button {
-    position: absolute;
-    bottom: 50px;
-    right: 20px;
     width: 200px;
     height: 35px;
     border-radius: 15px;
@@ -53,5 +50,7 @@
     font-size: 17px;
     background-color: #172945;
     padding: 5px;
+    margin: 20px 0;
+    float: right;
   }
 }
