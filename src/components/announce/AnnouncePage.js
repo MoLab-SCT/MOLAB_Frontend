@@ -53,16 +53,21 @@ function AnnounceList({ list, loginId, loginName }) {
   };
 
   const clickLike = async (likeStatus) => {
-    setStatus(!likeStatus);
-    try {
-      const response = await axios({
-        method: "post",
-        data: { no_detail: no, loginId, likeStatus },
-        url: "/api/announce/click_like",
-      });
+    if(loginId === ""){
+      alert("로그인 후 이용하세요");
+    }
+    else{
+      setStatus(!likeStatus);
+      try {
+        const response = await axios({
+          method: "post",
+          data: { no_detail: no, loginId, likeStatus },
+          url: "/api/announce/click_like",
+       });
       setLikeList(response.data);
-    } catch (e) {
+      } catch (e) {
       setError(e);
+      }
     }
   };
 
@@ -84,21 +89,10 @@ function AnnounceList({ list, loginId, loginName }) {
       </div>
       <div class="event_info">
         <h3>{title}</h3>
-        <div class="event_info_span">
-          <span>
-            {startdate} ~ {enddate}{" "}
-          </span>
-          <span>
-            <Link
-              style={{ color: "black" }}
-              to={{ pathname: `/announce/${no}` }}
-            >
-              더보기 {"\u003E"}
-            </Link>
-          </span>
-        </div>
-        <section className="event_response">
-          <section>
+        <p>
+          {startdate} ~ {enddate}{" "}
+        </p>
+        <span className="event_response">
             {likeLoading ? (
               <FaSpinner className="icon-spin" />
             ) : (
@@ -114,8 +108,13 @@ function AnnounceList({ list, loginId, loginName }) {
                 <span>{commentList.length}</span>
               </>
             )}
-          </section>
-        </section>
+        </span>
+        <span className="more"> 
+          <Link
+              style={{ color: "black" }}
+              to={{ pathname: `/announce/${no}` }}>더보기 {"\u003E"}
+          </Link>
+        </span>
       </div>
     </div>
   );
@@ -214,6 +213,7 @@ function AnnouncePage({ loginStatus, loginName, loginId }) {
         for (let i = 0; i < 9; i++) {
           listData.push(response.data[i]);
         }
+        console.log(listData);
         setList(listData);
       } catch (e) {
         setError(e);
@@ -294,13 +294,13 @@ function AnnouncePage({ loginStatus, loginName, loginId }) {
             theme="bootstrap"
           />
         </div>
-      </main>
-      <Footer />
-      <div className="upMove">
+        <div className="upMove">
         <a href="#up">
           <FaArrowAltCircleUp size="30" color="black" />
         </a>
       </div>
+      </main>
+      <Footer />
     </div>
   );
 }
