@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import logoWhite from "../../image/molab-logo-white.png";
 import logoBlack from "../../image/molab-logo-black.png";
+import {FiSearch} from "react-icons/fi";
 import "./Menu.scss";
 
 function MainMenu({ fontColor, logoColor, loginStatus }) {
@@ -39,14 +40,7 @@ function MainMenu({ fontColor, logoColor, loginStatus }) {
               className="search_text"
               placeholder="Search.."
             />
-            <button
-              type="submit"
-              title="검색"
-              className="search_btn"
-              value="검색"
-            >
-              <span className="icon_search_submit"></span>
-            </button>
+            <FiSearch style={{ color: logoColor, width: "1.4em", height: "1.4em"}} className = 'search_btn'/>
           </form>
         </div>
 
