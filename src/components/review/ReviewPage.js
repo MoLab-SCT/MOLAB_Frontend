@@ -4,8 +4,6 @@ import Footer from "../footer/Footer";
 import axios from "axios";
 import "./ReviewPage.scss";
 
-// 페이지네이션 / 카테고리 버튼 추가 예정
-
 function Review({ review }) {
   const { review_title, review_date, review_content, review_img } = review;
   const link = "./img" + review_img;
