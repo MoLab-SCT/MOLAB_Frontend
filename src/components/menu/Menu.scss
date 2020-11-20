@@ -115,19 +115,16 @@ header {
       border-radius: 24px;
       padding: 0 8px 0 22px;
       background-color: transparent;
+      position: relative;
     }
 
     .search_btn {
-      background: url("../../image/Search.png") no-repeat;
-      width: 38px;
-      height: 38px;
-      border: none;
-      background-size: 25px;
+      color: white;
+      width: 1.5em;
+      height: 1.5em;
       position: absolute;
-      top: 6px;
-      right: 3px;
-      box-sizing: border-box;
-      text-indent: -9999em;
+      top: 7px;
+      right: 12px;
     }
   }
 }
