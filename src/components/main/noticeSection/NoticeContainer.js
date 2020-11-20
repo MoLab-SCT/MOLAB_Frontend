@@ -1,55 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import "./NoticeContainer.scss";
 
 /* date 변수 받아서 d-day로 바꾸기 */
-function NoticeLists({ title, free, imageSrc, date }) {
+function NoticeLists({ no, title, free, imageSrc, date }) {
   return (
-    <div className="notice_list">
-      <img src={imageSrc} alt={title} />
-      <div className="notice_info">
-        <strong className="notice_title">{title}</strong>
-        <span className="notice_price">{{ free } ? "무료" : "유료"} </span>
-        <span className="notice_date">{date}</span>
+    <Link to={{pathname :  `/announce/${no}`}} style={{color: "black"}}>
+      <div className="notice_list">
+        <img src={require("" + imageSrc)} alt={title} />
+        <div className="notice_info">
+          <strong className="notice_title">{title}</strong>
+          <span className="notice_date">{date}</span>
+          <span className="notice_price">{free} </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
 function NoticeContainer() {
-  const [noticeList, setNotice] = useState([
-    {
-      id: 1,
-      title: "서울 특화 VR/AR 콘텐츠 개발 지원(수요처연계형) 참여기관 모집",
-      date: "2020-08-15",
-      free: true,
-      imageSrc: require("../../../image/poster1.png"),
-      contents: "",
-    },
-    {
-      id: 2,
-      title: "서울 특화 VR/AR 콘텐츠 개발 지원(수요처연계형) 참여기관 모집",
-      date: "2020-08-15",
-      free: false,
-      imageSrc: require("../../../image/poster1.png"),
-      contents: "",
-    },
-    {
-      id: 3,
-      title: "서울 특화 VR/AR 콘텐츠 개발 지원(수요처연계형) 참여기관 모집",
-      date: "2020-08-15",
-      free: false,
-      imageSrc: require("../../../image/poster1.png"),
-      contents: "",
-    },
-    {
-      id: 4,
-      title: "서울 특화 VR/AR 콘텐츠 개발 지원(수요처연계형) 참여기관 모집",
-      date: "2020-08-15",
-      free: false,
-      imageSrc: require("../../../image/poster1.png"),
-      contents: "",
-    },
-  ]);
+
+  const [noticeList, setNotice] = useState([]);
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        const response = await axios.get("/api/announce");
+        setNotice(response.data.slice(0,4));
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
+    fetchList();
+  },[]);
+
 
   return (
     <div className="group">
@@ -61,10 +47,11 @@ function NoticeContainer() {
         {noticeList.map((list) => (
           <NoticeLists
             title={list.title}
-            free={list.free}
-            imageSrc={list.imageSrc}
-            date={list.date}
-            key={list.id}
+            free="무료"
+            imageSrc={"./img/" + list.img}
+            date={list.startdate}
+            key={list.no}
+            no ={list.no}
           />
         ))}
       </div>

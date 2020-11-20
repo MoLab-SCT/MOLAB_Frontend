@@ -1,7 +1,6 @@
 .group_notice_area {
   display: flex;
   justify-content: center;
-  text-align: center;
 
   .notice_list {
     padding: 10px;
@@ -11,7 +10,8 @@
       transform: scale(1.1);
     }
     img {
-      width: 230px;
+      width: 232px;
+      height: 290px;
     }
 
     .notice_info {
@@ -24,9 +24,12 @@
       overflow: hidden;
 
       .notice_title {
-        margin: 0;
-        font-size: 13px;
+        margin: 10px 12px;
+        font-size: 0.9rem;
         word-break: normal;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .notice_price,
