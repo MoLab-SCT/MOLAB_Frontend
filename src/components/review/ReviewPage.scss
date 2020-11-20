@@ -59,7 +59,14 @@
         p {
           border-bottom: 1px solid #707070;
           padding-bottom: 5px;
-          margin: 0 0 13px 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin: 15px 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          font-size: 1rem;
+          line-height: 1.5rem;
         }
         span {
           margin: 10px 0 10px 0;
