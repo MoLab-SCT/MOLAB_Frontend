@@ -42,7 +42,7 @@
       width: 100px;
       padding: 15px;
       margin: 25px;
-      border: 1px solid rgba(241, 241, 241, 0.77);
+      border: 1px solid #cacaca;
       border-radius: 5px;
       -webkit-box-shadow: 5px 8px 6px -1px rgba(209, 209, 209, 0.77);
       -moz-box-shadow: 5px 8px 6px -1px rgba(209, 209, 209, 0.77);
@@ -92,7 +92,7 @@
       border: 1px solid #8d8d8d;
       border-radius: 1em;
       margin: 20px 20px 20px 0;
-      min-width: 548px;
+      width: 548px;
       a {
         text-decoration: none;
         color: black;
@@ -128,9 +128,10 @@
       }
 
       .list_content {
-        padding: 10px;
+        padding: 16px;
         height: 220px;
         min-height: 220px;
+        box-sizing: border-box;
 
         &.loading {
           .non-text-h3,
@@ -153,7 +154,6 @@
         }
 
         p {
-          width: 528px;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -182,20 +182,8 @@
           padding: 4px;
           border-radius: 10px;
           text-align: center;
-          &.environment {
+          .environment {
             background-color: #8ce99a;
-          }
-
-          &.traffic {
-            background-color: #66d9e8;
-          }
-
-          &.welfare {
-            background-color: #ffe066;
-          }
-
-          &.energy {
-            background-color: #b197fc;
           }
         }
       }
@@ -215,4 +203,20 @@
   100% {
     opacity: 0.1;
   }
+}
+
+.traffic {
+  background-color: #66d9e8;
+}
+
+.welfare {
+  background-color: #ffe066;
+}
+
+.energy {
+  background-color: #b197fc;
+}
+
+.environment {
+  background-color: #8ce99a;
 }
