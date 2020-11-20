@@ -46,8 +46,8 @@
     border: none;
     background-size: 33px;
     position: absolute;
-    top: 0;
-    right: 37px;
+    top: 3px;
+    right: 22px;
     box-sizing: border-box;
     text-indent: -9999em;
   }
@@ -88,26 +88,28 @@
 
       h3 {
         width: 300px;
-        font-size: 15px;
+        font-size: 18px;
         padding: 12px;
         margin: 0 auto;
         overflow: hidden;
       }
 
-      .event_info_span {
-        margin: 0 auto;
-        width: 300px;
+      p{
+        margin: 0 8px;
         padding: 12px;
-
-        span:last-child {
-          float: right;
-        }
       }
 
       .event_response {
-        margin: 0 auto;
-        width: 300px;
+        margin: 0 8px;
+        padding: 10px;
+        float: left;
       }
+
+      .more{
+        float: right;
+        padding: 10px;
+      }
+
     }
   }
 }
