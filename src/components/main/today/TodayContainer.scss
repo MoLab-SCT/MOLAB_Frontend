@@ -1,11 +1,11 @@
 .group_today_area {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 20px;
 
   .calender_area {
     border-top: 1px solid #686869;
-    height: 401px;
+    margin: 0 40px;
     .calender_header {
       font-size: 1.17em;
       display: block;
@@ -19,7 +19,7 @@
         border-bottom: 0.2px solid #535453;
         tr {
           th {
-            padding: 15px 34px;
+            padding: 15px 30px;
           }
         }
       }
@@ -45,20 +45,30 @@
               color: #535453;
               border: 2px solid #f6d55c;
               background-color: white;
-              width: 155px;
+              width: 167px;
+              height: 80px;
               text-align: center;
+              display: flex;
+              justify-content: center;
+              justify-items: center;
+              flex-direction: column;
               position: absolute;
-              top: -60px;
-              left: -43px;
-              padding: 20px 10px;
+              top: -125px;
+              left: -67px;
+              padding: 20px;
               font-size: 0.79rem;
             }
           }
         }
         .calender-day {
-          padding: 20px 30px;
+          width: 78px;
+          height: 51.6px;
         }
       }
     }
+  }
+
+  iframe{
+    margin: 0 40px;
   }
 }
