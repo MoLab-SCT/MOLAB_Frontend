@@ -6,8 +6,12 @@
   }
 }
 
+#sct_header{
+  background-color: #172945;
+}
+
 .definition_sct {
-  background-color: #01a9db;
+  background-color: #172945;
   height: 340px;
   padding: 25px 20px 25px 20px;
   color: white;
@@ -42,7 +46,7 @@
   width: 1050px;
   height: 500px;
   margin: 0 auto;
-  border-left: 1px solid #01a9db;
+  border-left: 1px solid #172945;
 
   h2 {
     margin: 0 10px 25px 10px;
@@ -69,8 +73,8 @@
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: #01a9db;
-        border: 1px solid #01a9db;
+        background: #172945;
+        border: 1px solid #172945;
       }
       p {
         display: inline-flex;
@@ -127,8 +131,8 @@
     }
     hr {
       width: 100px;
-      color: #01a9db;
-      border: thin solid#01A9DB;
+      color: #172945;
+      border: thin solid#172945;
     }
     article {
       text-align: center;
@@ -145,7 +149,7 @@
       }
 
       #highlight {
-        background-color: #01a9db;
+        background-color: #172945;
         color: white;
       }
     }
@@ -185,7 +189,7 @@
     text-align: center;
     p {
       height: 60px;
-      background-color: blanchedalmond;
+      background-color: #F2F2F2;
       line-height: 60px;
       font-weight: bold;
     }
@@ -196,7 +200,7 @@
   }
 
   .molab_last {
-    background-color: #01a9db;
+    background-color: #172945;
     height: 400px;
     color: white;
     display: flex;
@@ -204,12 +208,20 @@
     flex-direction: column;
     line-height: 2rem;
     text-align: center;
+    font-family:  'yg-jalnan';
 
     p {
       font-size: 1.5rem;
       font-weight: bold;
     }
   }
+}
+
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .molab_challenge {
