@@ -17,7 +17,8 @@ function ProjectForm({ loginStatus }) {
     com_date: "",
   });
 
-  const [file, setFile] = useState(null);
+  //aws s3 sdk 사용 필요
+  // const [file, setFile] = useState(null);
 
   const [loading, setLoading] = useState(null);
 
@@ -49,14 +50,10 @@ function ProjectForm({ loginStatus }) {
   const formChange = useCallback(
     (e) => {
       const { name, value } = e.target;
-      if (name === "addFile") {
-        setFile(e.target.files[0]);
-      } else {
-        setForm({
-          ...projectForm,
-          [name]: value,
-        });
-      }
+      setForm({
+        ...projectForm,
+        [name]: value,
+      });
     },
     [projectForm, setForm]
   );
@@ -99,7 +96,6 @@ function ProjectForm({ loginStatus }) {
       
       let formData = new FormData();
       formData.append("projectForm", JSON.stringify(projectForm));
-      formData.append("file", file);
 
       const response = await axios({
         method: "post",
@@ -168,10 +164,6 @@ function ProjectForm({ loginStatus }) {
             <section className="editor" ref={detailInfo_ref}>
               <label>상세 내용</label>
               <EditorSection getEditorContents={getEditorContents} />
-            </section>
-            <section>
-              <label htmlFor="addFile">기타 파일 첨부</label>
-              <input type="file" name="addFile" onChange={formChange} />
             </section>
             <button
               type="button"
